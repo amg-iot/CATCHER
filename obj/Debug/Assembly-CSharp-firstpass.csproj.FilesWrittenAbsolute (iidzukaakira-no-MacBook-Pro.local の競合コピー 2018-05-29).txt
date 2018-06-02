@@ -1,0 +1,44 @@
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/obj/Debug/Assembly-CSharp-firstpass.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/obj/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/UnityEngine.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/UnityEditor.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/UnityEngine.TestRunner.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/nunit.framework.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/UnityEngine.Analytics.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/UnityEngine.VR.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/Mono.Cecil.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/Unity.DataContract.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/iizuka_akira/myfolder/git/Games/Fireworks Project/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/Assembly-CSharp-firstpass.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/obj/Debug/Assembly-CSharp-firstpass.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/obj/Debug/Assembly-CSharp-firstpass.dll.mdb
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/UnityEngine.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/UnityEditor.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/UnityEngine.TestRunner.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/nunit.framework.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/UnityEngine.Analytics.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/UnityEngine.HoloLens.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/UnityEngine.VR.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/Mono.Cecil.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/Unity.DataContract.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Temp/bin/Debug/Mono.Cecil.Mdb.dll
