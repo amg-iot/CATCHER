@@ -49,7 +49,7 @@ public class Presenter : MonoBehaviour {
 		//10秒毎に花火を上げる
 		Observable.Interval(TimeSpan.FromMilliseconds(1000*3)).Subscribe(l => {
 				
-			_view.ViewFireworks(99);
+			_view.ViewFireworks(2);
 
 		}).AddTo(this);
 	}

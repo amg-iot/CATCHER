@@ -22,20 +22,68 @@ public class View : MonoBehaviour {
 	{
 		Debug.Log ("type = " + type);
 
-		if (type == 1) {
+		if (type == 0) {
+			/** 球型 （テスト用）*/
 			Transform player = GameObject.Find ("Player").transform;
 
 			if (player != null) {
-				GameObject mainPlayer = player.Find("MainPlayer").gameObject;
+				GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
 
 				Vector3 pointList = mainPlayer.transform.position;
-				GameObject perefab = (GameObject)Resources.Load ("Prefab/DefaultSeedObject");
+				GameObject perefab = (GameObject)Resources.Load ("Prefab/00-DefaultSeedObject");
 
 //				pointList.y += 10;
-				pointList.z -= 3000;
+				pointList.z -= 1800;
 				pointList.y += 500;
 				GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-				newGameObject.transform.Rotate (new Vector3(-90, 0, 0));
+				newGameObject.transform.Rotate (new Vector3 (0, 0, 0));
+			}
+		} else if (type == 1) {
+			/** １重の円周型 */
+			Transform player = GameObject.Find ("Player").transform;
+
+			if (player != null) {
+				GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
+
+				Vector3 pointList = mainPlayer.transform.position;
+				GameObject perefab = (GameObject)Resources.Load ("Prefab/01-CircumferenceMonoSeedObject");
+
+				pointList.z -= 1800;
+				pointList.y += 500;
+				GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
+				newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
+
+				// 重力方向に向きを修正
+				GameObject childObject = newGameObject.transform.GetChild (0).gameObject;
+				childObject.transform.Rotate (new Vector3 (0, -90, -90));
+
+			}
+		} else if (type == 2) {
+			/** 2重の円周型 */
+			Transform player = GameObject.Find ("Player").transform;
+
+			Debug.Log ("02-CircumferenceDoubleSeedObject");
+
+			if (player != null) {
+				GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
+
+				Vector3 pointList = mainPlayer.transform.position;
+				GameObject perefab = (GameObject)Resources.Load ("Prefab/02-CircumferenceDoubleSeedObject");
+
+				pointList.z -= 1800;
+				pointList.y += 500;
+				GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
+				newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
+
+				// 重力方向に向きを修正
+				GameObject childObject = newGameObject.transform.GetChild (0).gameObject;
+				childObject.transform.Rotate (new Vector3 (0, -90, -90));
+
+				// 重力方向に向きを修正
+				GameObject childObject2 = newGameObject.transform.GetChild (1).gameObject;
+				childObject2.transform.Rotate (new Vector3 (0, -90, -90));
+
+
 			}
 
 		} else if (4 <= type && type <= 7) {
@@ -73,7 +121,7 @@ public class View : MonoBehaviour {
 				GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
 
 				Vector3 pointList = mainPlayer.transform.position;
-				GameObject prefab = (GameObject)Resources.Load ("Prefab/KanjiHiSeedObject");
+				GameObject prefab = (GameObject)Resources.Load ("Prefab/09-KanjiHiSeedObject");
 
 				pointList.y += 10;
 				pointList.z += 150;
@@ -109,12 +157,17 @@ public class View : MonoBehaviour {
 				GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
 
 				Vector3 pointList = mainPlayer.transform.position;
-				GameObject perefab = (GameObject)Resources.Load ("Prefab/MichySeedObject");
+				GameObject perefab = (GameObject)Resources.Load ("Prefab/19-MickySeedObject");
 
-				pointList.y += 10;
-				pointList.z += 100;
+				pointList.y += 350;
+				pointList.z -= 1800;
 				GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
 				newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
+
+				// 重力方向に向きを修正
+				GameObject childObject = newGameObject.transform.GetChild(0).gameObject;
+				childObject.transform.Rotate (new Vector3 (0, -90, 0));
+
 			}
 
 		}else if (type == 22) {
@@ -126,12 +179,16 @@ public class View : MonoBehaviour {
 				GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
 
 				Vector3 pointList = mainPlayer.transform.position;
-				GameObject perefab = (GameObject)Resources.Load ("Prefab/SpiralSeedObject");
+				GameObject perefab = (GameObject)Resources.Load ("Prefab/22-SpiralSeedObject");
 
-				pointList.z -= 3000;
-				pointList.y += 500;
+				pointList.z -= 1800;
 				GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
 				newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
+
+				// 重力方向に向きを修正
+				GameObject childObject = newGameObject.transform.GetChild(0).gameObject;
+				childObject.transform.Rotate (new Vector3 (0, -90, -90));
+
 			}
 
 		} else if (type == 99) {
@@ -143,9 +200,9 @@ public class View : MonoBehaviour {
 				GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
 
 				//--------------------------------------
-				// 丸型作成
+				// 球型１作成
 				Vector3 pointList = mainPlayer.transform.position;
-				GameObject perefab = (GameObject)Resources.Load ("Prefab/DefaultSeedObject3-2");
+				GameObject perefab = (GameObject)Resources.Load ("Prefab/99-DemoSeedObject");
 
 				pointList.x -= 1800;
 				pointList.z -= 2200;
@@ -154,9 +211,9 @@ public class View : MonoBehaviour {
 				newGameObject.transform.Rotate (new Vector3(-90, 0, 0));
 
 				//--------------------------------------
-				// 丸型作成
+				// 球型２作成
 				Vector3 pointList2 = mainPlayer.transform.position;
-				GameObject perefab2 = (GameObject)Resources.Load ("Prefab/DefaultSeedObject3-2");
+				GameObject perefab2 = (GameObject)Resources.Load ("Prefab/99-DemoSeedObject");
 
 				pointList2.x -= 1800;
 				pointList2.z -= 1600;
@@ -164,17 +221,7 @@ public class View : MonoBehaviour {
 				GameObject newGameObject2 = Instantiate (perefab2, pointList2, Quaternion.identity);
 				newGameObject2.transform.Rotate (new Vector3(-90, 0, 0));
 
-				//--------------------------------------
-				// 螺旋作成
-//				Vector3 pointList = mainPlayer.transform.position;
-//				GameObject perefab = (GameObject)Resources.Load ("Prefab/SpiralSeedObject");
-//
-//				pointList.z -= 0;
-//				pointList.y += 0;
-//				GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-//				newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
 			}
-		
 		}
 	}
 
@@ -189,7 +236,7 @@ public class View : MonoBehaviour {
 			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
 
 			Vector3 pointList = mainPlayer.transform.position;
-			GameObject prefab = (GameObject)Resources.Load ("Prefab/FanningSeedObject");
+			GameObject prefab = (GameObject)Resources.Load ("Prefab/04-07-FanningSeedObject");
 
 			pointList.y += 10;
 			pointList.z += 100;

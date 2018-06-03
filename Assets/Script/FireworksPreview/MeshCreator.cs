@@ -28,20 +28,28 @@ public class MeshCreator : MonoBehaviour
 	/// <summary>
 	/// 花火の形パターンと対応するMeshを作成
 	/// </summary>
-	/// <returns>The mesh by type.</returns>
-	/// <param name="type">Type.</param>
-	private Mesh CreateMeshByType(int type) {
+	/// <returns>The mesh by pattern.</returns>
+	/// <param name="pattern">pattern 花火の形(type)とは一致しないので注意！</param>
+	private Mesh CreateMeshByType(int pattern) {
 
-		if (type == 1) {
-			/* １重の円周 */
-			return CreateCircumferenceMesh();
+		if (pattern == 1) {
+			/* １重の円周（大） */
+			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 100, new CirclePoints());
+		
+		} else if (pattern == 2) {
+			/* 1重の円周　(中) */
+			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 75, new CirclePoints());			
 			 
-		} else if (type == 19) {
+		} else if (pattern == 3) {
+			/* 1重の円周　(小) */
+			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 50, new CirclePoints());			
+
+		} else if (pattern == 19) {
 			/* ミッキー型 */
 			return CreateMickyMesh ();
-		} else if (type == 22) {
+		} else if (pattern == 22) {
 			/* 螺旋型 */
-			return CreateSpiralMesh(new Vector3(0,  300, 0));
+			return CreateSpiralMesh(new Vector3(0, 0, 0));
 		}
 
 		return new Mesh ();
@@ -160,7 +168,7 @@ public class MeshCreator : MonoBehaviour
 		return mesh;
 
 	}
-
+			
 	/// <summary>
 	/// 円を近似する三角形の頂点の座標と、組み合わせを返す
 	/// </summary>
@@ -216,16 +224,15 @@ public class MeshCreator : MonoBehaviour
 	/// 円周形のMeshを返す
 	/// </summary>
 	/// <returns>The circumference mesh.</returns>
-	private Mesh CreateCircumferenceMesh() {
+	private Mesh CreateCircumferenceMesh(Vector3 theOrigin, int CircleSize, CirclePoints cpoints) {
 
 		Mesh mesh = new Mesh ();
 
 		// 構造体の初期化
-		CirclePoints cpoints = new CirclePoints();
 		cpoints.vertextList = new List<Vector3>();
 		cpoints.indexList = new List<int>();
 
-		cpoints = CreateCircumferencePoints(new Vector3(0, 0, 0), 100, cpoints);
+		cpoints = CreateCircumferencePoints(new Vector3(0, 0, 0), CircleSize, cpoints);
 
 		// Meshの作成
 		mesh.RecalculateNormals (); // 法線方向を(0,0,1) 固定にしない
