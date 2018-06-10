@@ -289,17 +289,27 @@
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityEngineBridge\YieldInstructionCache.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityWinRTBridge\Thread.cs" />
      <Compile Include="Assets\Plugins\UniRx\Scripts\UnityWinRTBridge\ThreadPoolScheduler_UnityWinRT.cs" />
-     <None Include="Assets\Day-Night Skyboxes\readme.txt" />
-     <None Include="Assets\ZRNAssets\license_en.txt" />
-     <None Include="Assets\ZRNAssets\license_jp.txt" />
-     <None Include="Assets\ZRNAssets\Skyboxes\_skybox info.txt" />
-     <None Include="Assets\ZRNAssets\005339_08932_25_14\Shaders\su_Double_and_Clip.shader" />
-     <None Include="Assets\Day-Night Skyboxes\Textures\Readme for Assigning.txt" />
-     <None Include="Assets\ZRNAssets\PQAssets\license_jp.txt" />
+     <Compile Include="Assets\Plugins\WebSocket\WebSocket.cs" />
+     <None Include="Assets\Resources\Day-Night Skyboxes\readme.txt" />
+     <None Include="Assets\Resources\ZRNAssets\license_en.txt" />
+     <None Include="Assets\Photon Unity Networking\Demos\MarcoPolo-Tutorial\marcopolo-readme.txt" />
+     <None Include="Assets\Photon Unity Networking\link.xml" />
+     <None Include="Assets\Resources\ZRNAssets\license_jp.txt" />
+     <None Include="Assets\Plugins\Photon3Unity3D.xml" />
+     <None Include="Assets\Resources\ZRNAssets\Skyboxes\_skybox info.txt" />
+     <None Include="Assets\Plugins\release_history.txt" />
+     <None Include="Assets\Resources\ZRNAssets\005339_08932_25_14\Shaders\su_Double_and_Clip.shader" />
+     <None Include="Assets\Resources\Day-Night Skyboxes\Textures\Readme for Assigning.txt" />
+     <None Include="Assets\Resources\ZRNAssets\PQAssets\license_jp.txt" />
+     <None Include="Assets\Photon Unity Networking\Demos\DemoBoxes\Resources\eurof_tt.txt" />
      <None Include="Assets\Plugins\UniRx\ReadMe.txt" />
-     <None Include="Assets\ZRNAssets\005339_08932_25_14\Shaders\su_VertexCol_1UV_Single.shader" />
-     <None Include="Assets\ZRNAssets\PQAssets\license_en.txt" />
-     <None Include="Assets\ZRNAssets\005339_08932_25_14\Documents\ReadMe.txt" />
+     <None Include="Assets\Resources\ZRNAssets\005339_08932_25_14\Shaders\su_VertexCol_1UV_Single.shader" />
+     <None Include="Assets\Photon Unity Networking\Demos\Shared Assets\Skin\3dText.shader" />
+     <None Include="Assets\Photon Unity Networking\readme.txt" />
+     <None Include="Assets\Resources\ZRNAssets\PQAssets\license_en.txt" />
+     <None Include="Assets\Photon Unity Networking\Demos\DemoRockPaperScissors\Assets\OpenSans\Apache License.txt" />
+     <None Include="Assets\Resources\ZRNAssets\005339_08932_25_14\Documents\ReadMe.txt" />
+     <None Include="Assets\Photon Unity Networking\changelog.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -320,6 +330,12 @@
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
+ <Reference Include="websocket-sharp">
+ <HintPath>/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Assets/Plugins/WebSocket/websocket-sharp.dll</HintPath>
+ </Reference>
+ <Reference Include="Photon3Unity3D">
+ <HintPath>/Users/iizuka_akira/Dropbox/AMG/src/FireworksDemo/Assets/Plugins/Photon3Unity3D.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
