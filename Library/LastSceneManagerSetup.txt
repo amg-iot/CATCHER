@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Demo_20180601_0228.unity
+- path: Assets/Scene/Fireworks Project.unity
   isLoaded: 1
   isActive: 1

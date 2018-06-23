@@ -11,3 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Fireworks Project.unity
     guid: ba6fa594cce10ce44a9ecb9fb6732ed5
+  - enabled: 1
+    path: Assets/Scene/photonSetting.unity
+    guid: a71325067d24b934596aa318e7f03a05
+  - enabled: 1
+    path: Assets/Scene/ServerSendScene.unity
+    guid: c271b310bb097284690d4d3e5abf9885
+  m_configObjects: {}
