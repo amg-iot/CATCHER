@@ -7,8 +7,10 @@ using UnityEngine.SceneManagement;
 public class PhotonCommon : Photon.PunBehaviour {
     private string  m_resourcePath  = "Prefab/jsonCube";
     private float   m_randomCircle  = 4.0f;
+    private bool    m_is_server  = false;
 
     private const string SCENE_NAME = "Fireworks Project";
+    private const string SCENE_NAME_SERVER = "ServerSendScene";
 
 	// Use this for initialization
 	void Start () {
@@ -35,16 +37,17 @@ public class PhotonCommon : Photon.PunBehaviour {
     {
         // 一定時間経ってからシーンを読む.
         yield return new WaitForSeconds( i_time );
-        SceneManager.LoadScene( SCENE_NAME );
+        SceneManager.LoadScene( (m_is_server)? SCENE_NAME_SERVER:SCENE_NAME );
     }
 
 	private void OnLoadedScene( Scene i_scene, LoadSceneMode i_mode )
     {
         // シーンの遷移が完了したら自分用のオブジェクトを生成.
-        if( i_scene.name == SCENE_NAME )
+		if( PhotonNetwork.isMasterClient )
         {
-            Vector3 pos = Random.insideUnitCircle * m_randomCircle;
-            PhotonNetwork.Instantiate( m_resourcePath, pos, Quaternion.identity, 0 );
+			var properties  = new ExitGames.Client.Photon.Hashtable();
+			properties.Add( "jsonText", "asdd" );
+			PhotonNetwork.room.SetCustomProperties( properties );
         }
     }
 
@@ -73,6 +76,8 @@ public class PhotonCommon : Photon.PunBehaviour {
 			roomOptions.MaxPlayers = (byte)10;
 			// ルームを作成（今回の実装では、失敗＝マスタークライアントなし、として「ルーム」を作成）
 			bool result = PhotonNetwork.CreateRoom(val, roomOptions, null);
+			// Serverですよフラグ
+			m_is_server = true;
 		}
 	}
 
