@@ -14,17 +14,9 @@ public class Menue : MonoBehaviour {
 		// 管理者ボタンのコールバック追加
 		Button AdminButton = GameObject.Find("AdminButton").GetComponent<Button>();
 		AdminButton.onClick.AddListener (OnClickAdminButton);
-
-		// 親子モノづくり体験ボタンのコールバック追加
-		Button StartButton = GameObject.Find("StartButton").GetComponent<Button>();
-		StartButton.onClick.AddListener (OnClickStartButton);
 	}
-
-	public void OnClickStartButton() {
-		SceneManager.LoadScene ("photonSetting");
-	}
-
     public void OnClickAdminButton() {
+		// Photon接続設定画面に遷移する
 		SceneManager.LoadScene ("photonSetting");
 	}
 }

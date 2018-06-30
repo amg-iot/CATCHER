@@ -8,13 +8,7 @@ using System.Text;
 using System.Threading;
 
 
-public class View : MonoBehaviour {
-	
-	[SerializeField]
-	public delegate void OnSumButtonChildClicked(PointerEventData data); // delegate 型の宣言
-	[SerializeField]
-	// 「加算」ボタンが押された時のイベントリスナー
-	public OnSumButtonChildClicked OnSumButtonClickedListener;
+public class JsonCommon : MonoBehaviour {
 
 
 	// 花火を表示する
