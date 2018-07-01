@@ -7,6 +7,15 @@ using MiniJSON;
 
 public class PhotonNetClient : Photon.PunBehaviour {
     
+	/**
+	* Use this for initialization.
+	*/
+	void Start () {
+	}
+
+	/**
+	* JSONデータのパースを行う.
+	*/
 	private JsonData readJsonData(string text) {
 		JsonData jsonData = new JsonData();
 		
@@ -77,11 +86,10 @@ public class PhotonNetClient : Photon.PunBehaviour {
 
 		return jsonData;
 	}
-
-	// Use this for initialization
-	void Start () {
-	}
 	
+	/**
+	* サーバー側からのデータ送信時に呼び出される.
+	*/
 	public void OnPhotonCustomRoomPropertiesChanged( ExitGames.Client.Photon.Hashtable changedProperties ){
 		object value = null;
 

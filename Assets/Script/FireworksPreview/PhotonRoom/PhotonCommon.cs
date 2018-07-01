@@ -5,14 +5,17 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PhotonCommon : Photon.PunBehaviour {
-    private string  m_resourcePath  = "Prefab/jsonCube";
-    private float   m_randomCircle  = 4.0f;
+	// サーバー判定フラグ
     private bool    m_is_server  = false;
 
+	// クライアント用遷移シーン名
     private const string SCENE_NAME = "LaunchFireworks";
+	// サーバー用遷移シーン名
     private const string SCENE_NAME_SERVER = "ServerSendScene";
 
-	// Use this for initialization
+	/**
+	* Use this for initialization.
+	*/
 	void Start () {
 		// Photonネットワークの設定を行う
         PhotonNetwork.ConnectUsingSettings("0.1");
@@ -33,24 +36,35 @@ public class PhotonCommon : Photon.PunBehaviour {
         SceneManager.sceneLoaded += OnLoadedScene;
 	}
 	
+	/**
+	* シーンの読み込みを行う.
+	*/
 	private IEnumerator LoadScene( float i_time )
     {
         // 一定時間経ってからシーンを読む.
         yield return new WaitForSeconds( i_time );
+		// シーンの読み込み
         SceneManager.LoadScene( (m_is_server)? SCENE_NAME_SERVER:SCENE_NAME );
     }
 
+	/**
+	* シーンの読み込みを行う(遅延読み込み).
+	*/
 	private void OnLoadedScene( Scene i_scene, LoadSceneMode i_mode )
     {
         // シーンの遷移が完了したら自分用のオブジェクトを生成.
 		if( PhotonNetwork.isMasterClient )
         {
+			// カスタムプロパティーを追加
 			var properties  = new ExitGames.Client.Photon.Hashtable();
 			properties.Add( "jsonText", "test" );
 			PhotonNetwork.room.SetCustomProperties( properties );
         }
     }
 
+	/**
+	* ROOMへ入る.
+	*/
 	public void OnClickRoomLoadButton() {
 		InputField RoomName = GameObject.Find("RoomName").GetComponent<InputField>();
 
@@ -60,24 +74,28 @@ public class PhotonCommon : Photon.PunBehaviour {
 		}
 	}
 
+	/**
+	* ROOMの作成.
+	*/
 	public void OnClickRoomAddButton() {
 		InputField RoomName = GameObject.Find("RoomName").GetComponent<InputField>();
 
-		var val = RoomName.text;
-
-		if (val != null && val != "" ) {
-			//作成する部屋の設定
-			RoomOptions roomOptions = new RoomOptions();
-			//ロビーで見える部屋にする
-			roomOptions.IsVisible = true;
-			//他のプレイヤーの入室を許可する
-			roomOptions.IsOpen = true;
-			//入室可能人数を設定
-			roomOptions.MaxPlayers = (byte)10;
-			// ルームを作成（今回の実装では、失敗＝マスタークライアントなし、として「ルーム」を作成）
-			bool result = PhotonNetwork.CreateRoom(val, roomOptions, null);
-			// Serverですよフラグ
-			m_is_server = true;
+		if (RoomName != null) {
+			var val = RoomName.text;
+			if (val != null && val != "" ) {
+				//作成する部屋の設定
+				RoomOptions roomOptions = new RoomOptions();
+				//ロビーで見える部屋にする
+				roomOptions.IsVisible = true;
+				//他のプレイヤーの入室を許可する
+				roomOptions.IsOpen = true;
+				//入室可能人数を設定
+				roomOptions.MaxPlayers = (byte)10;
+				// ルームを作成
+				bool result = PhotonNetwork.CreateRoom(val, roomOptions, null);
+				// Serverですよフラグ
+				m_is_server = true;
+			}
 		}
 	}
 
@@ -117,6 +135,9 @@ public class PhotonCommon : Photon.PunBehaviour {
 		}
 	}
 
+	/**
+	* 名前の情報をテキストエリアに反映.
+	*/
 	public void OnClick(string roomName)
 	{
 		InputField RoomName = GameObject.Find("RoomName").GetComponent<InputField>();

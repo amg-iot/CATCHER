@@ -15,13 +15,16 @@ public class Presenter : MonoBehaviour {
 	[SerializeField]
 	private View _view;
 
-	private bool i_run = false;
-
 	// Model
 	[SerializeField]
 	private Model _model;
 
-	// オブジェクト生成時に呼び出す
+	// 実行中フラグ
+	private bool i_run = false;
+
+	/**
+	* オブジェクト生成時に呼び出すSONデータ送信ボタン.
+	*/
 	public void Awake()
 	{
 		// ビューのオブジェクトを作成
@@ -31,29 +34,24 @@ public class Presenter : MonoBehaviour {
 		SetEvents();
 	}
 
-	void Start () {
-
-		// //10秒毎に花火を上げる
-		// Observable.Interval(TimeSpan.FromMilliseconds(1000*3)).Subscribe(l => {
-		// 	_view.ViewFireworks(2);
-		// }).AddTo(this);
-	}
-
-	// Viewのイベントの設定を行う
+	/**
+	* Viewのイベントの設定を行う.
+	*/
 	private void SetEvents()
 	{
-/*
-        var hoge = GameObject.Find("sum");
-		EventTrigger trigger = hoge.GetComponent<EventTrigger>();
-		EventTrigger.Entry entry = new EventTrigger.Entry();
-		entry.eventID = EventTriggerType.PointerDown;
-		entry.callback.AddListener(( data ) => { _view.OnSumButtonClicked( (PointerEventData)data ); });
-		trigger.triggers.Add(entry);
+        // var hoge = GameObject.Find("sum");
+		// EventTrigger trigger = hoge.GetComponent<EventTrigger>();
+		// EventTrigger.Entry entry = new EventTrigger.Entry();
+		// entry.eventID = EventTriggerType.PointerDown;
+		// entry.callback.AddListener(( data ) => { _view.OnSumButtonClicked( (PointerEventData)data ); });
+		// trigger.triggers.Add(entry);
 
-		_view.OnSumButtonClickedListener = OnSumButtonChildClicked;
-*/
+		// _view.OnSumButtonClickedListener = OnSumButtonChildClicked;
 	}
-
+	
+	/**
+	* 開始関数.
+	*/
 	public void StartHanabi (JsonData data) {
 
 		if (i_run) {
@@ -68,8 +66,18 @@ public class Presenter : MonoBehaviour {
 	}
 
 	// 「＋」ボタンが押された時に呼ばれるメソッド
-	public void OnSumButtonChildClicked(PointerEventData data)
-	{
-		Debug.Log ("Click");
-	}
+	// public void OnSumButtonChildClicked(PointerEventData data)
+	// {
+	// 	Debug.Log ("Click");
+	// }
+	/**
+	* 開始関数.
+	*/
+	// void Start () {
+
+	// 	// //10秒毎に花火を上げる
+	// 	// Observable.Interval(TimeSpan.FromMilliseconds(1000*3)).Subscribe(l => {
+	// 	// 	_view.ViewFireworks(2);
+	// 	// }).AddTo(this);
+	// }
 }

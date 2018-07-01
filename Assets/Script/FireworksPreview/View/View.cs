@@ -7,17 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-
+/*
+ * 
+ * Some code is borrowed from [Rx.NET](https://rx.codeplex.com/) and [mono/mcs](https://github.com/mono/mono).
+ *
+ */
 public class View : MonoBehaviour {
 	
 	[SerializeField]
 	public delegate void OnSumButtonChildClicked(PointerEventData data); // delegate 型の宣言
+
 	[SerializeField]
-	// 「加算」ボタンが押された時のイベントリスナー
 	public OnSumButtonChildClicked OnSumButtonClickedListener;
 
-
-	// 花火を表示する
+	/**
+	* 花火を表示する.
+	*/
 	public void ViewFireworks(int type)
 	{
 		Debug.Log ("type = " + type);

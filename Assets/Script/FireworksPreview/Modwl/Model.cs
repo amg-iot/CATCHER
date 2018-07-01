@@ -1,21 +1,25 @@
 ﻿using UniRx;
 
+/*
+ * 
+ * Some code is borrowed from [Rx.NET](https://rx.codeplex.com/) and [mono/mcs](https://github.com/mono/mono).
+ *
+ */
 public class Model {
 	// タイミング
 	public ReactiveProperty<int> _timing { get; private set; }
-	//private ReactiveProperty<int> _timing;
-	//public IReadOnlyReactiveProperty<int> Timing
-	//{
-	//	get { return _timing; }
-	//}
 
-	// コンストラクタ
+	/**
+	* コンストラクタ.
+	*/
 	public Model()
 	{
 		_timing = new ReactiveProperty<int>();
 	}
 
-	// Timingの値を設定する
+	/**
+	* 値の設定.
+	*/
 	public void SetTiming(int timing)
 	{
 		_timing.Value = timing;
