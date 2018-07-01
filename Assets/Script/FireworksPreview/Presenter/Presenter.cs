@@ -15,6 +15,8 @@ public class Presenter : MonoBehaviour {
 	[SerializeField]
 	private View _view;
 
+	private bool i_run = false;
+
 	// Model
 	[SerializeField]
 	private Model _model;
@@ -27,6 +29,14 @@ public class Presenter : MonoBehaviour {
 
 		// 各種ビューのコールバックを設定	
 		SetEvents();
+	}
+
+	void Start () {
+
+		// //10秒毎に花火を上げる
+		// Observable.Interval(TimeSpan.FromMilliseconds(1000*3)).Subscribe(l => {
+		// 	_view.ViewFireworks(2);
+		// }).AddTo(this);
 	}
 
 	// Viewのイベントの設定を行う
@@ -44,14 +54,17 @@ public class Presenter : MonoBehaviour {
 */
 	}
 
-	void Start () {
+	public void StartHanabi (JsonData data) {
 
-		//10秒毎に花火を上げる
-		Observable.Interval(TimeSpan.FromMilliseconds(1000*3)).Subscribe(l => {
-				
-			_view.ViewFireworks(2);
+		if (i_run) {
+			return;
+		}
 
-		}).AddTo(this);
+		i_run = true;
+		// //10秒毎に花火を上げる
+		// Observable.Interval(TimeSpan.FromMilliseconds(1000*3)).Subscribe(l => {
+		// 	_view.ViewFireworks(2);
+		// }).AddTo(this);
 	}
 
 	// 「＋」ボタンが押された時に呼ばれるメソッド

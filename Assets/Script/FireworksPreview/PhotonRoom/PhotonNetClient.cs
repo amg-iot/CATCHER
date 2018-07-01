@@ -90,6 +90,10 @@ public class PhotonNetClient : Photon.PunBehaviour {
 			try {
 				string repText = (string)value;
 				JsonData data = readJsonData(repText);
+
+				// 同一オブジェクト内のソースのみ可能
+				Presenter presenter = GetComponent<Presenter>();
+				presenter.StartHanabi(data);
 			} catch {
 			}
 		}

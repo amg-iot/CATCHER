@@ -252,14 +252,4 @@ public class View : MonoBehaviour {
 	
 		}
 	}
-		
-	// 「＋」ボタンが押された時に呼ばれるメソッド
-/*	public void OnSumButtonClicked(PointerEventData data)
-	{
-		if (OnSumButtonClickedListener != null)
-		{
-			OnSumButtonClickedListener(data);
-		}
-	}
-	*/
 }
