@@ -88,6 +88,56 @@ public class PhotonNetClient : Photon.PunBehaviour {
 	}
 	
 	/**
+	* 各花火データを一つにまとめる.
+	*/
+	private HanabiDataList[] convMainList(JsonData jsonData) {
+		int addCount = 0;
+		HanabiDataList[] result = new HanabiDataList[addCount];
+
+		foreach(PersonalData json in jsonData.party){
+			
+			foreach(BulletArr bulletArr in json.bulletArr){
+				System.Array.Resize(ref result, ++addCount);
+				result[addCount-1] = new HanabiDataList();
+
+				result[addCount-1].author = json.author;
+				result[addCount-1].sex = json.sex;
+				result[addCount-1].name = json.name;
+				result[addCount-1].y = json.y;
+				result[addCount-1].speed_main = json.speed;
+				result[addCount-1].type = bulletArr.type;
+				result[addCount-1].speed = bulletArr.speed;
+				result[addCount-1].color = bulletArr.color;
+				result[addCount-1].degree = bulletArr.degree;
+				result[addCount-1].radius = bulletArr.radius;
+				result[addCount-1].rectWidth = bulletArr.rectWidth;
+				result[addCount-1].rectHeight = bulletArr.rectHeight;
+			}
+		}
+
+		return result;
+	}
+
+	public HanabiDataList[] Shuffle(HanabiDataList[] array)
+	{
+		var length = array.Length;
+		var result = new HanabiDataList[length];
+		System.Array.Copy(array, result, length);
+
+		var random = new System.Random();
+		int n = length;
+		while (1 < n)
+		{
+			n--;
+			int k = random.Next(n + 1);
+			var tmp = result[k];
+			result[k] = result[n];
+			result[n] = tmp;
+		}
+		return result;
+	}
+
+	/**
 	* サーバー側からのデータ送信時に呼び出される.
 	*/
 	public void OnPhotonCustomRoomPropertiesChanged( ExitGames.Client.Photon.Hashtable changedProperties ){
@@ -99,9 +149,16 @@ public class PhotonNetClient : Photon.PunBehaviour {
 				string repText = (string)value;
 				JsonData data = readJsonData(repText);
 
-				// 同一オブジェクト内のソースのみ可能
-				Presenter presenter = GetComponent<Presenter>();
-				presenter.StartHanabi(data);
+				if (data != null) {
+
+					HanabiDataList[] hanabiData = convMainList(data);
+					if (hanabiData != null) {
+						hanabiData = Shuffle(hanabiData);
+						// 同一オブジェクト内のソースのみ可能
+						Presenter presenter = GetComponent<Presenter>();
+						presenter.StartHanabi(hanabiData);
+					}
+				}
 			} catch {
 			}
 		}

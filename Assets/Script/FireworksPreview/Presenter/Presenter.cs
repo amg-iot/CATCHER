@@ -52,7 +52,7 @@ public class Presenter : MonoBehaviour {
 	/**
 	* 開始関数.
 	*/
-	public void StartHanabi (JsonData data) {
+	public void StartHanabi (HanabiDataList[] hanabiData) {
 
 		if (i_run) {
 			return;
