@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/Menu.unity
     guid: 04db6cf589258db40b7512efd51c3c6c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scene/Fireworks Project.unity
     guid: ba6fa594cce10ce44a9ecb9fb6732ed5
   - enabled: 1
@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/ServerSendScene.unity
     guid: c271b310bb097284690d4d3e5abf9885
+  - enabled: 1
+    path: Assets/Scene/LaunchFireworks.unity
+    guid: 807e80a64cf294376b18e5e75ae6e061
   m_configObjects: {}

@@ -9,7 +9,7 @@ public class PhotonCommon : Photon.PunBehaviour {
     private float   m_randomCircle  = 4.0f;
     private bool    m_is_server  = false;
 
-    private const string SCENE_NAME = "Fireworks Project";
+    private const string SCENE_NAME = "LaunchFireworks";
     private const string SCENE_NAME_SERVER = "ServerSendScene";
 
 	// Use this for initialization
