@@ -46,7 +46,7 @@ public class PhotonCommon : Photon.PunBehaviour {
 		if( PhotonNetwork.isMasterClient )
         {
 			var properties  = new ExitGames.Client.Photon.Hashtable();
-			properties.Add( "jsonText", "asdd" );
+			properties.Add( "jsonText", "test" );
 			PhotonNetwork.room.SetCustomProperties( properties );
         }
     }
