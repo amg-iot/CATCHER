@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using MiniJSON;
 
 public class PhotonNetClient : Photon.PunBehaviour {
     
@@ -89,8 +90,7 @@ public class PhotonNetClient : Photon.PunBehaviour {
 			try {
 				string repText = (string)value;
 				JsonData data = readJsonData(repText);
-			} catch (Exception) {
-				MessageBox.Show("Error!!");
+			} catch {
 			}
 		}
 	}
