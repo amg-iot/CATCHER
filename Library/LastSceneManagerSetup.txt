@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/ServerSendScene.unity
+- path: Assets/Scene/photonSetting.unity
   isLoaded: 1
   isActive: 1

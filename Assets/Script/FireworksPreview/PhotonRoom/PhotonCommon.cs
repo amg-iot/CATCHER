@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class PhotonCommon : Photon.PunBehaviour {
 	// サーバー判定フラグ
     private bool    m_is_server  = false;
+	private CanvasGroup canvasGroup = null;
+	private CanvasGroup canvasLoadGroup = null;
 
 	// クライアント用遷移シーン名
     private const string SCENE_NAME = "LaunchFireworks";
@@ -32,6 +34,11 @@ public class PhotonCommon : Photon.PunBehaviour {
 		Button RoomLoad = GameObject.Find("RoomLoad").GetComponent<Button>();
 		RoomLoad.onClick.AddListener (OnClickRoomLoadButton);
 
+		canvasGroup = GameObject.Find("Canvas").GetComponent<CanvasGroup>();
+		canvasGroup.alpha = 1;
+		canvasLoadGroup = GameObject.Find("CanvasLoad").GetComponent<CanvasGroup>();
+		canvasLoadGroup.alpha = 0;
+
 		 // シーンの読み込みコールバックを登録.
         SceneManager.sceneLoaded += OnLoadedScene;
 	}
@@ -41,10 +48,46 @@ public class PhotonCommon : Photon.PunBehaviour {
 	*/
 	private IEnumerator LoadScene( float i_time )
     {
+		canvasGroup.alpha = 0;
+		canvasLoadGroup.alpha = 1;
+
         // 一定時間経ってからシーンを読む.
         yield return new WaitForSeconds( i_time );
 		// シーンの読み込み
-        SceneManager.LoadScene( (m_is_server)? SCENE_NAME_SERVER:SCENE_NAME );
+        AsyncOperation _async = SceneManager.LoadSceneAsync( (m_is_server)? SCENE_NAME_SERVER:SCENE_NAME );
+
+		Image progress = GameObject.Find("progress").GetComponent<Image>();
+		Text loadText = GameObject.Find("LoadText").GetComponent<Text>();
+
+		int count = 0;
+		float progressNum = (float)0.01;
+		//シーン移動を許可するかどうか
+        _async.allowSceneActivation = false;
+		 while (_async.progress < 0.9f) //0.9で止まる
+        {
+            Debug.Log(_async.progress);
+			progress.fillAmount = (float)_async.progress;
+			if (count == 0) {
+				loadText.text = "NowLoading";
+				count++;
+			} else if (count == 1) {
+				loadText.text = "NowLoading.";
+				count++;
+			} else if (count == 2) {
+				loadText.text = "NowLoading..";
+				count++;
+			} else if (count == 3) {
+				loadText.text = "NowLoading...";
+				count++;
+			} else if (count == 4) {
+				loadText.text = "NowLoading....";
+				count = 0;
+			}
+        }
+        Debug.Log("ロード完了");
+        _async.allowSceneActivation = true;
+
+		yield return _async;
     }
 
 	/**
@@ -149,7 +192,7 @@ public class PhotonCommon : Photon.PunBehaviour {
     {
         Debug.Log("OnJoinedRoom");
 		// 少し時間をおいてからシーンを遷移させる.
-		StartCoroutine( LoadScene( 2.0f ) );
+		StartCoroutine( LoadScene( 0.5f ) );
     }
 
     // 「ロビー」に接続した際に呼ばれるコールバック
