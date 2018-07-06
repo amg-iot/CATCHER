@@ -92,7 +92,7 @@ public class Presenter : MonoBehaviour {
 	/**
 	* 開始関数.
 	*/
-	public void StartHanabi (HanabiDataList[] hanabiData) {
+	public void StartHanabi (JsonData data) {
 
 		if (i_run) {
 			return;
@@ -101,10 +101,12 @@ public class Presenter : MonoBehaviour {
 		i_run = true;
 		canvasWaitGroup = GameObject.Find("WaitCanvas").GetComponent<CanvasGroup>();
 		canvasWaitGroup.alpha = 0;
+
+		int runCunt = 0;
 		// //10秒毎に花火を上げる
-		// Observable.Interval(TimeSpan.FromMilliseconds(1000*3)).Subscribe(l => {
-		// 	_view.ViewFireworks(2);
-		// }).AddTo(this);
+		Observable.Interval(TimeSpan.FromMilliseconds(1000*3)).Subscribe(l => {
+			_view.ViewFireworks(hanabiData[runCunt++]);
+		}).AddTo(this);
 	}
 
 	// 「＋」ボタンが押された時に呼ばれるメソッド

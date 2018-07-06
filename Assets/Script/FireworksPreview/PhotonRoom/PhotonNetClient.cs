@@ -151,13 +151,10 @@ public class PhotonNetClient : Photon.PunBehaviour {
 
 				if (data != null) {
 
-					HanabiDataList[] hanabiData = convMainList(data);
-					if (hanabiData != null) {
-						hanabiData = Shuffle(hanabiData);
-						// 同一オブジェクト内のソースのみ可能
-						Presenter presenter = GetComponent<Presenter>();
-						presenter.StartHanabi(hanabiData);
-					}
+					//hanabiData = Shuffle(hanabiData);
+					// 同一オブジェクト内のソースのみ可能
+					Presenter presenter = GetComponent<Presenter>();
+					presenter.StartHanabi(data);
 				}
 			} catch {
 			}

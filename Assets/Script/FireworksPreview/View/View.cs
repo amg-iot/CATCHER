@@ -23,9 +23,9 @@ public class View : MonoBehaviour {
 	/**
 	* 花火を表示する.
 	*/
-	public void ViewFireworks(int type)
+	public void ViewFireworks(HanabiDataList hanabiData)
 	{
-		Debug.Log ("type = " + type);
+		Debug.Log ("type = " + hanabiData.type);
 
 		if (type == 0) {
 			/** 球型 （テスト用）*/
