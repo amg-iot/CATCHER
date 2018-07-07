@@ -13,6 +13,8 @@ using System.Threading;
  *
  */
 public class View : MonoBehaviour {
+
+	public int m_run_count = 0;
 	
 	[SerializeField]
 	public delegate void OnSumButtonChildClicked(PointerEventData data); // delegate 型の宣言
@@ -23,10 +25,9 @@ public class View : MonoBehaviour {
 	/**
 	* 花火を表示する.
 	*/
-	public void ViewFireworks(HanabiDataList hanabiData)
+	public bool ViewFireworks(PersonalData party)
 	{
-		Debug.Log ("type = " + hanabiData.type);
-
+		int type = 0;
 		if (type == 0) {
 			/** 球型 （テスト用）*/
 			Transform player = GameObject.Find ("Player").transform;
@@ -228,6 +229,8 @@ public class View : MonoBehaviour {
 
 			}
 		}
+
+		return true;
 	}
 
 	/// <summary>

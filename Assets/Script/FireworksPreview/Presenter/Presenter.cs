@@ -102,16 +102,18 @@ public class Presenter : MonoBehaviour {
 		canvasWaitGroup = GameObject.Find("WaitCanvas").GetComponent<CanvasGroup>();
 		canvasWaitGroup.alpha = 0;
 
-		int runCunt = 0;
-		// //10秒毎に花火を上げる
-		Observable.Interval(TimeSpan.FromMilliseconds(1000*3)).Subscribe(l => {
-			_view.ViewFireworks(hanabiData[runCunt++]);
-		}).AddTo(this);
-	}
+		var collection = new ReactiveCollection<PersonalData>();
 
-	// 「＋」ボタンが押された時に呼ばれるメソッド
-	// public void OnSumButtonChildClicked(PointerEventData data)
-	// {
-	// 	Debug.Log ("Click");
-	// }
+		collection
+		.ObserveAdd()
+		.Subscribe(x =>
+		{
+			_view.ViewFireworks((PersonalData) x.Value);
+			//Debug.Log(string.Format("Add [{0}] = {1}", x.Index, x.Value));
+		});
+
+		foreach(PersonalData party in  data.party){
+			collection.Add(party);
+		}
+	}
 }
