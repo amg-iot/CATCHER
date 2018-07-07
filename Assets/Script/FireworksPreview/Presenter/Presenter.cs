@@ -98,7 +98,7 @@ public class Presenter : MonoBehaviour {
 			return;
 		}
 
-		i_run = true;
+		//i_run = true;
 		canvasWaitGroup = GameObject.Find("WaitCanvas").GetComponent<CanvasGroup>();
 		canvasWaitGroup.alpha = 0;
 

@@ -27,8 +27,8 @@ public class View : MonoBehaviour {
 	*/
 	public bool ViewFireworks(PersonalData party)
 	{
-		int type = 0;
-		if (type == 0) {
+		BulletArr[] bulletArr = party.bulletArr;
+		if (bulletArr.Length == 0) {
 			/** 球型 （テスト用）*/
 			Transform player = GameObject.Find ("Player").transform;
 
@@ -44,8 +44,9 @@ public class View : MonoBehaviour {
 				GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
 				newGameObject.transform.Rotate (new Vector3 (0, 0, 0));
 			}
-		} else if (type == 1) {
-			/** １重の円周型 */
+		}
+		// １重の円周型
+		else if (bulletArr.Length == 18) {
 			Transform player = GameObject.Find ("Player").transform;
 
 			if (player != null) {
@@ -64,8 +65,9 @@ public class View : MonoBehaviour {
 				childObject.transform.Rotate (new Vector3 (0, -90, -90));
 
 			}
-		} else if (type == 2) {
-			/** 2重の円周型 */
+		} 
+		// 2重の円周型・扇の下
+		else if (bulletArr.Length == 30) {
 			Transform player = GameObject.Find ("Player").transform;
 
 			Debug.Log ("02-CircumferenceDoubleSeedObject");
@@ -92,33 +94,44 @@ public class View : MonoBehaviour {
 
 			}
 
-		} else if (4 <= type && type <= 7) {
-			/* 扇型 */
+		}
+		// 3重の円周型
+		else if (bulletArr.Length == 39) {
+			
+		}
+		// 扇型
+		else if (bulletArr.Length == 25) {
 
 			// 扇型の向き
-			int direction = 0;
+			// int direction = 0;
 
-			switch (type) {
-			case 4: // 上
-				direction = 0;
-				break;
-			case 5: // 左
-				direction = 1;
-				break;
-			case 6: // 右
-				direction = 3;
-				break;
-			case 7: // 下
-				direction = 2;
-				break;
+			// switch (type) {
+			// case 4: // 上
+			// 	direction = 0;
+			// 	break;
+			// case 5: // 左
+			// 	direction = 1;
+			// 	break;
+			// case 6: // 右
+			// 	direction = 3;
+			// 	break;
+			// case 7: // 下
+			// 	direction = 2;
+			// 	break;
 
-			}
+			// }
 
-			// 花火の生成
-			newFanningFireworks(direction);
+			// // 花火の生成
+			// newFanningFireworks(direction);
 
-		} else if (type == 9) {
-			/* 「火」 */
+		}
+		// 花形？
+		else if (bulletArr.Length == 48) {
+
+
+		}
+		// 「火」
+		else if (bulletArr.Length == 21) {
 			// TODO: ※実装中　particleのsub emittingの座標変えられるのか？
 
 			Transform player = GameObject.Find ("Player").transform;
@@ -154,8 +167,9 @@ public class View : MonoBehaviour {
 
 			}
 
-		} else if (type == 19) {
-			/* ミッキー型 */
+		}
+		// ミッキー型
+		else if (bulletArr.Length == 26) {
 
 			Transform player = GameObject.Find ("Player").transform;
 
@@ -176,8 +190,53 @@ public class View : MonoBehaviour {
 
 			}
 
-		}else if (type == 22) {
-			/* 螺旋型 */
+		}
+		// ミッキー型(顔あり)
+		else if (bulletArr.Length == 33) {
+
+		}
+		// ハート形
+		else if (bulletArr.Length == 38) {
+
+		}
+		// 花形2?
+		else if (bulletArr.Length == 32) {
+
+		} 
+		// 花形3?
+		else if (bulletArr.Length == 48) {
+
+		}  
+		// すごく開くやつ
+		else if (bulletArr.Length == 90) {
+
+		}   
+		// 半笑い
+		else if (bulletArr.Length == 31) {
+
+		}    
+		// アイスクリーム
+		else if (bulletArr.Length == 24) {
+
+		}     
+		// モンスターボール
+		else if (bulletArr.Length == 102) {
+
+		}      
+		// ミッキー丸３つ
+		else if (bulletArr.Length == 3) {
+
+		}       
+		// 手裏剣
+		else if (bulletArr.Length == 48) {
+
+		}        
+		// 手裏剣(カラフル)
+		else if (bulletArr.Length == 64) {
+
+		}
+		// 螺旋型
+		else if (bulletArr.Length == 76) {
 		
 			Transform player = GameObject.Find ("Player").transform;
 
@@ -197,7 +256,7 @@ public class View : MonoBehaviour {
 
 			}
 
-		} else if (type == 99) {
+		} else if (bulletArr.Length == 9999) {
 			/* デモ画像撮影用 */
 		
 			Transform player = GameObject.Find ("Player").transform;
