@@ -1,11 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/FireworksPreview/View/View.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Script/FireworksPreview/Presenter/Presenter.cs">
     <Files>
-      <File FileName="Assets/Script/FireworksPreview/View/View.cs" Line="76" Column="46" />
-      <File FileName="Assets/Script/FireworksPreview/Presenter/Presenter.cs" Line="52" Column="25" />
-      <File FileName="Assets/Script/FireworksPreview/Modwl/Model.cs" Line="1" Column="1" />
-      <File FileName="Assets/Script/FireworksPreview/MeshCreator.cs" Line="233" Column="39" />
+      <File FileName="Assets/Script/FireworksPreview/MeshCreator.cs" Line="191" Column="31" />
+      <File FileName="Assets/Script/FireworksPreview/View/View.cs" Line="82" Column="4" />
+      <File FileName="Assets/Script/FireworksPreview/PhotonRoom/PhotonNetClient.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/FireworksPreview/Presenter/Presenter.cs" Line="17" Column="21" />
+      <File FileName="Assets/Script/FireworksPreview/PhotonRoom/PhotonNetServer.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/FireworksPreview/PhotonRoom/PhotonCommon.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/FireworksPreview/PhotonRoom/Menue.cs" Line="1" Column="1" />
+      <File FileName="Assets/Script/FireworksPreview/Json/HanabiJsonMain.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
