@@ -38,7 +38,16 @@ public class View : MonoBehaviour {
 		} 
 		// 2重の円周型・扇の下
 		else if (bulletArr.Length == 30) {
-			createCircumferenceDoubleFireworks ();
+
+			// 扇型の向き取得
+			int direction = checkDirectionType2(bulletArr);
+
+			if (direction != 0) {
+				// 花火の生成
+				newFanningFireworks(direction);
+			} else {
+				createCircumferenceDoubleFireworks ();
+			}
 		}
 		// 3重の円周型
 		else if (bulletArr.Length == 39) {
@@ -47,28 +56,11 @@ public class View : MonoBehaviour {
 		// 扇型
 		else if (bulletArr.Length == 25) {
 
-			// 扇型の向き
-			// int direction = 0;
+			// 扇型の向き取得
+			int direction = checkDirectionType(bulletArr);
 
-			// switch (type) {
-			// case 4: // 上
-			// 	direction = 0;
-			// 	break;
-			// case 5: // 左
-			// 	direction = 1;
-			// 	break;
-			// case 6: // 右
-			// 	direction = 3;
-			// 	break;
-			// case 7: // 下
-			// 	direction = 2;
-			// 	break;
-
-			// }
-
-			// // 花火の生成
-			// newFanningFireworks(direction);
-
+			// 花火の生成
+			newFanningFireworks(direction);
 		}
 		// 花形？
 		else if (bulletArr.Length == 48) {
@@ -78,12 +70,10 @@ public class View : MonoBehaviour {
 		// 「火」
 		else if (bulletArr.Length == 21) {
 			createKanjiHiFireworks ();
-
 		}
 		// ミッキー型
 		else if (bulletArr.Length == 26) {
 			createMichyOutlineFireworks ();
-
 		}
 		// ミッキー型(顔あり)
 		else if (bulletArr.Length == 33) {
@@ -133,11 +123,9 @@ public class View : MonoBehaviour {
 		// 螺旋型
 		else if (bulletArr.Length == 76) {
 			createSpiralFireworks ();
-
 			// デモ用
 		} else if (bulletArr.Length == 9999) {
 			createDemoFireworks ();
-		
 		}
 
 		return true;
@@ -444,5 +432,54 @@ public class View : MonoBehaviour {
 			newGameObject2.transform.Rotate (new Vector3(-90, 0, 0));
 
 		}
+	}
+
+	/// <summary>
+	/// 扇の取得慮タイプ判定
+	/// Creates the demo fireworks.
+	/// </summary>
+	public int checkDirectionType(BulletArr[] bulletArrList) {
+		int result = 0;
+
+		int checkNum = 0;
+		foreach(BulletArr bulletArr in bulletArrList){
+			checkNum += (int) bulletArr.degree;
+		}
+
+		if (checkNum >= 6750) {
+			// 上向き
+			result = 0;
+		} else if (checkNum < 6750 && checkNum >= 4500) {
+			// 左向き
+			result = 1;
+		} else {
+			// 右向き
+			result = 3;
+		}
+
+		return result;
+	}
+
+	/// <summary>
+	/// 扇の取得慮タイプ判定(下向き扇)
+	/// Creates the demo fireworks.
+	/// </summary>
+	public int checkDirectionType2(BulletArr[] bulletArrList) {
+		int result = 0;
+
+		int checkNum = 0;
+		foreach(BulletArr bulletArr in bulletArrList){
+			checkNum += (int) bulletArr.degree;
+		}
+
+		if (checkNum >= 2710) {
+			// 二重丸
+			result = 0;
+		} else {
+			// した向き
+			result = 2;
+		}
+
+		return result;
 	}
 }
