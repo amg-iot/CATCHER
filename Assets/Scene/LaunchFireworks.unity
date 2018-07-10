@@ -94049,6 +94049,58 @@ Transform:
   m_Father: {fileID: 1203081838}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: -108.02, y: 0, z: 0}
+--- !u!1001 &1373068481
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4260210344406548, guid: b3e271fb611637542ae11fa7313bb9cf, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260210344406548, guid: b3e271fb611637542ae11fa7313bb9cf, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.00036621094
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260210344406548, guid: b3e271fb611637542ae11fa7313bb9cf, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -0.00009274483
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260210344406548, guid: b3e271fb611637542ae11fa7313bb9cf, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260210344406548, guid: b3e271fb611637542ae11fa7313bb9cf, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260210344406548, guid: b3e271fb611637542ae11fa7313bb9cf, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260210344406548, guid: b3e271fb611637542ae11fa7313bb9cf, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4260210344406548, guid: b3e271fb611637542ae11fa7313bb9cf, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198113316231749730, guid: b3e271fb611637542ae11fa7313bb9cf,
+        type: 2}
+      propertyPath: SubModule.subEmitters.Array.data[3].emitter
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 199374125608391718, guid: b3e271fb611637542ae11fa7313bb9cf,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 60
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b3e271fb611637542ae11fa7313bb9cf, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1455018240
 GameObject:
   m_ObjectHideFlags: 0

@@ -166,6 +166,24 @@ public class MeshCreator : MonoBehaviour
 				-45
 			);
 
+		} else if (pattern == 180) {
+			/* モンスターボール：１重の円周（小） */
+			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 35, new CirclePoints ());
+
+		} else if (pattern == 181) {
+			/* モンスターボール：１重の円周（大） */
+			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 100, new CirclePoints ());
+
+		} else if (pattern == 182) {
+			/* モンスターボール：真ん中の線 */
+			return CreatePlaneMeshWithRotation (
+				new Vector3 (-1, 180, 0), 
+				new Vector3 ( 1, 180, 0), 
+				new Vector3 ( 1,  0, 0), 
+				new Vector3 (-1,  0, 0),
+				40
+			);
+
 		} else if (pattern == MESH_TYPE_SPIRAL) {
 			/* 螺旋型 */
 			return CreateSpiralMesh(new Vector3(0, 0, 0));
@@ -219,7 +237,7 @@ public class MeshCreator : MonoBehaviour
 		vertextList.Add(point2); //2番頂点
 
 		indexList.AddRange(new []{
-			0,2,1
+			1,2,3
 		});//0-2-1の頂点で1三角形。 1-2-3の頂点で1三角形。
 
 		mesh.RecalculateNormals (); // 法線方向を(0,0,1) 固定にしない

@@ -65,7 +65,6 @@ public class View : MonoBehaviour {
 		// 花形？
 		else if (bulletArr.Length == 48) {
 
-
 		}
 		// 「火」
 		else if (bulletArr.Length == 21) {
@@ -106,7 +105,7 @@ public class View : MonoBehaviour {
 		}     
 		// モンスターボール
 		else if (bulletArr.Length == 102) {
-
+			createMonstarBallFireworks ();
 		}      
 		// ミッキー丸３つ
 		else if (bulletArr.Length == 3) {
@@ -241,7 +240,6 @@ public class View : MonoBehaviour {
 
 	}
 
-
 	/// <summary>
 	/// 扇型の花火を生成する
 	/// </summary>
@@ -370,6 +368,34 @@ public class View : MonoBehaviour {
 			// 重力方向に向きを修正
 			GameObject childObject = newGameObject.transform.GetChild (0).gameObject;
 			childObject.transform.Rotate (new Vector3 (0, -90, 0));
+		}
+	}
+
+	/// <summary>
+	/// モンスターボール型の花火作成
+	/// </summary>
+	private void createMonstarBallFireworks() {
+		Transform player = GameObject.Find ("Player").transform;
+
+		if (player != null) {
+			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
+
+			Vector3 pointList = mainPlayer.transform.position;
+			GameObject prefab = (GameObject)Resources.Load ("Prefab/18-MonstarBallObject");
+
+			pointList.y += 10;
+			pointList.z += 100;
+
+			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
+			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
+
+			if (prefab.activeSelf) {
+				// 子要素のFireworksObjectの角度を調整
+				GameObject childObject = newGameObject.transform.GetChild(2).gameObject;
+				Vector3 pos = childObject.transform.position;
+				pos.x = -500;
+				childObject.transform.position = pos;
+			}
 		}
 	}
 
