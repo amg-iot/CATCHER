@@ -166,6 +166,30 @@ public class MeshCreator : MonoBehaviour
 				-45
 			);
 
+		} else if (pattern == 170) {
+			/* モンスターボール：１重の円周（小） */
+			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 50, new CirclePoints ());
+
+		} else if (pattern == 171) {
+			/* モンスターボール：真ん中の線 */
+			return CreatePlaneMeshWithRotation (
+				new Vector3 (-1, 120, 0), 
+				new Vector3 ( 1, 120, 0), 
+				new Vector3 ( 1,  0, 0), 
+				new Vector3 (-1,  0, 0),
+				40
+			);
+
+		} else if (pattern == 172) {
+			/* モンスターボール：真ん中の線 */
+			return CreatePlaneMeshWithRotation (
+				new Vector3 (-1, -120, 0), 
+				new Vector3 ( 1, -120, 0), 
+				new Vector3 ( 1,  0, 0), 
+				new Vector3 (-1,  0, 0),
+				40
+			);
+
 		} else if (pattern == 180) {
 			/* モンスターボール：１重の円周（小） */
 			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 35, new CirclePoints ());

@@ -101,7 +101,7 @@ public class View : MonoBehaviour {
 		}    
 		// アイスクリーム
 		else if (bulletArr.Length == 24) {
-
+			createIceCreamFireworks ();
 		}     
 		// モンスターボール
 		else if (bulletArr.Length == 102) {
@@ -368,6 +368,26 @@ public class View : MonoBehaviour {
 			// 重力方向に向きを修正
 			GameObject childObject = newGameObject.transform.GetChild (0).gameObject;
 			childObject.transform.Rotate (new Vector3 (0, -90, 0));
+		}
+	}
+
+	/// <summary>
+	/// アイスクリーム型の花火作成
+	/// </summary>
+	private void createIceCreamFireworks() {
+		Transform player = GameObject.Find ("Player").transform;
+
+		if (player != null) {
+			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
+
+			Vector3 pointList = mainPlayer.transform.position;
+			GameObject prefab = (GameObject)Resources.Load ("Prefab/17-IceCreamObject");
+
+			pointList.y += 10;
+			pointList.z += 100;
+
+			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
+			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
 		}
 	}
 
