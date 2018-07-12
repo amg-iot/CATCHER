@@ -183,8 +183,8 @@ public class MeshCreator : MonoBehaviour
 		} else if (pattern == 172) {
 			/* モンスターボール：真ん中の線 */
 			return CreatePlaneMeshWithRotation (
-				new Vector3 (-1, -120, 0), 
-				new Vector3 ( 1, -120, 0), 
+				new Vector3 (-1, 90, 0), 
+				new Vector3 ( 1, 90, 0), 
 				new Vector3 ( 1,  0, 0), 
 				new Vector3 (-1,  0, 0),
 				40

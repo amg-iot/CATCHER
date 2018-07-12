@@ -403,19 +403,12 @@ public class View : MonoBehaviour {
 			Vector3 pointList = mainPlayer.transform.position;
 			GameObject prefab = (GameObject)Resources.Load ("Prefab/18-MonstarBallObject");
 
-			pointList.y += 10;
-			pointList.z += 100;
+			pointList.x += 1200;
+			pointList.y += 100;
+			pointList.z += 0;
 
 			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-
-			if (prefab.activeSelf) {
-				// 子要素のFireworksObjectの角度を調整
-				GameObject childObject = newGameObject.transform.GetChild(2).gameObject;
-				Vector3 pos = childObject.transform.position;
-				pos.x = -500;
-				childObject.transform.position = pos;
-			}
+			newGameObject.transform.Rotate (new Vector3 (-90, 0, 140));
 		}
 	}
 
