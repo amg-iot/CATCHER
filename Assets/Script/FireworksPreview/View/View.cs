@@ -38,7 +38,16 @@ public class View : MonoBehaviour {
 		} 
 		// 2重の円周型・扇の下
 		else if (bulletArr.Length == 30) {
-			createCircumferenceDoubleFireworks ();
+
+			// 扇型の向き取得
+			int direction = checkDirectionType2(bulletArr);
+
+			if (direction != 0) {
+				// 花火の生成
+				newFanningFireworks(direction);
+			} else {
+				createCircumferenceDoubleFireworks ();
+			}
 		}
 		// 3重の円周型
 		else if (bulletArr.Length == 39) {
@@ -47,43 +56,23 @@ public class View : MonoBehaviour {
 		// 扇型
 		else if (bulletArr.Length == 25) {
 
-			// 扇型の向き
-			// int direction = 0;
+			// 扇型の向き取得
+			int direction = checkDirectionType(bulletArr);
 
-			// switch (type) {
-			// case 4: // 上
-			// 	direction = 0;
-			// 	break;
-			// case 5: // 左
-			// 	direction = 1;
-			// 	break;
-			// case 6: // 右
-			// 	direction = 3;
-			// 	break;
-			// case 7: // 下
-			// 	direction = 2;
-			// 	break;
-
-			// }
-
-			// // 花火の生成
-			// newFanningFireworks(direction);
-
+			// 花火の生成
+			newFanningFireworks(direction);
 		}
 		// 花形？
 		else if (bulletArr.Length == 48) {
-
 
 		}
 		// 「火」
 		else if (bulletArr.Length == 21) {
 			createKanjiHiFireworks ();
-
 		}
 		// ミッキー型
 		else if (bulletArr.Length == 26) {
 			createMichyOutlineFireworks ();
-
 		}
 		// ミッキー型(顔あり)
 		else if (bulletArr.Length == 33) {
@@ -100,23 +89,23 @@ public class View : MonoBehaviour {
 		} 
 		// 花形3?
 		else if (bulletArr.Length == 48) {
-
+			/** 球型 */
+			createTestSphereFireworks ();
 		}  
 		// すごく開くやつ
 		else if (bulletArr.Length == 90) {
-
 		}   
 		// 半笑い
 		else if (bulletArr.Length == 31) {
-
+			createSmaileFaceFireworks ();
 		}    
 		// アイスクリーム
 		else if (bulletArr.Length == 24) {
-
+			createIceCreamFireworks ();
 		}     
 		// モンスターボール
 		else if (bulletArr.Length == 102) {
-
+			createMonstarBallFireworks ();
 		}      
 		// ミッキー丸３つ
 		else if (bulletArr.Length == 3) {
@@ -133,11 +122,9 @@ public class View : MonoBehaviour {
 		// 螺旋型
 		else if (bulletArr.Length == 76) {
 			createSpiralFireworks ();
-
 			// デモ用
 		} else if (bulletArr.Length == 9999) {
 			createDemoFireworks ();
-		
 		}
 
 		return true;
@@ -153,12 +140,12 @@ public class View : MonoBehaviour {
 			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
 
 			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/00-DefaultSeedObject");
+			GameObject perefab = (GameObject)Resources.Load ("Prefab/15-DefaultSeedObject");
 
 			pointList.z -= 1800;
 			pointList.y += 500;
 			GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (0, 0, 0));
+			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
 		}
 
 	}
@@ -252,7 +239,6 @@ public class View : MonoBehaviour {
 		}
 
 	}
-
 
 	/// <summary>
 	/// 扇型の花火を生成する
@@ -362,6 +348,28 @@ public class View : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// 半笑い花火作成
+	/// </summary>
+	private void createSmaileFaceFireworks() {
+
+		Transform player = GameObject.Find ("Player").transform;
+
+		if (player != null) {
+			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
+
+			Vector3 pointList = mainPlayer.transform.position;
+			GameObject prefab = (GameObject)Resources.Load ("Prefab/16-FaceSeedObject");
+
+			pointList.x += 1200;
+			pointList.y += 100;
+			pointList.z += 0;
+
+			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
+			newGameObject.transform.Rotate (new Vector3 (-90, 0, 140));
+		}
+	}
+
+	/// <summary>
 	/// ミッキー（円３つ）型の花火作成
 	/// </summary>
 	private void createMichy3CirlesFireworks() {
@@ -382,6 +390,47 @@ public class View : MonoBehaviour {
 			// 重力方向に向きを修正
 			GameObject childObject = newGameObject.transform.GetChild (0).gameObject;
 			childObject.transform.Rotate (new Vector3 (0, -90, 0));
+		}
+	}
+
+	/// <summary>
+	/// アイスクリーム型の花火作成
+	/// </summary>
+	private void createIceCreamFireworks() {
+		Transform player = GameObject.Find ("Player").transform;
+
+		if (player != null) {
+			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
+
+			Vector3 pointList = mainPlayer.transform.position;
+			GameObject prefab = (GameObject)Resources.Load ("Prefab/17-IceCreamObject");
+
+			pointList.y += 10;
+			pointList.z += 100;
+
+			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
+			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
+		}
+	}
+
+	/// <summary>
+	/// モンスターボール型の花火作成
+	/// </summary>
+	private void createMonstarBallFireworks() {
+		Transform player = GameObject.Find ("Player").transform;
+
+		if (player != null) {
+			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
+
+			Vector3 pointList = mainPlayer.transform.position;
+			GameObject prefab = (GameObject)Resources.Load ("Prefab/18-MonstarBallObject");
+
+			pointList.x += 1200;
+			pointList.y += 100;
+			pointList.z += 0;
+
+			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
+			newGameObject.transform.Rotate (new Vector3 (-90, 0, 140));
 		}
 	}
 
@@ -444,5 +493,54 @@ public class View : MonoBehaviour {
 			newGameObject2.transform.Rotate (new Vector3(-90, 0, 0));
 
 		}
+	}
+
+	/// <summary>
+	/// 扇の取得慮タイプ判定
+	/// Creates the demo fireworks.
+	/// </summary>
+	public int checkDirectionType(BulletArr[] bulletArrList) {
+		int result = 0;
+
+		int checkNum = 0;
+		foreach(BulletArr bulletArr in bulletArrList){
+			checkNum += (int) bulletArr.degree;
+		}
+
+		if (checkNum >= 6750) {
+			// 上向き
+			result = 0;
+		} else if (checkNum < 6750 && checkNum >= 4500) {
+			// 左向き
+			result = 1;
+		} else {
+			// 右向き
+			result = 3;
+		}
+
+		return result;
+	}
+
+	/// <summary>
+	/// 扇の取得慮タイプ判定(下向き扇)
+	/// Creates the demo fireworks.
+	/// </summary>
+	public int checkDirectionType2(BulletArr[] bulletArrList) {
+		int result = 0;
+
+		int checkNum = 0;
+		foreach(BulletArr bulletArr in bulletArrList){
+			checkNum += (int) bulletArr.degree;
+		}
+
+		if (checkNum >= 2710) {
+			// 二重丸
+			result = 0;
+		} else {
+			// した向き
+			result = 2;
+		}
+
+		return result;
 	}
 }
