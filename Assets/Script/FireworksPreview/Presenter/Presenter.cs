@@ -32,8 +32,6 @@ public class Presenter : MonoBehaviour {
 	void Start () {
 		// 文字変更コールバック設定
 		StartCoroutine( FuncCoroutine() );
-
-		Transform player = GameObject.Find ("Player").transform;
 	}
 
 	/**

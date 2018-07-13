@@ -89,15 +89,15 @@ public class View : MonoBehaviour {
 		} 
 		// 花形3?
 		else if (bulletArr.Length == 48) {
-
+			/** 球型 */
+			createTestSphereFireworks ();
 		}  
 		// すごく開くやつ
 		else if (bulletArr.Length == 90) {
-
 		}   
 		// 半笑い
 		else if (bulletArr.Length == 31) {
-
+			createSmaileFaceFireworks ();
 		}    
 		// アイスクリーム
 		else if (bulletArr.Length == 24) {
@@ -140,12 +140,12 @@ public class View : MonoBehaviour {
 			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
 
 			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/00-DefaultSeedObject");
+			GameObject perefab = (GameObject)Resources.Load ("Prefab/15-DefaultSeedObject");
 
 			pointList.z -= 1800;
 			pointList.y += 500;
 			GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (0, 0, 0));
+			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
 		}
 
 	}
@@ -344,6 +344,28 @@ public class View : MonoBehaviour {
 			GameObject childObject = newGameObject.transform.GetChild(0).gameObject;
 			childObject.transform.Rotate (new Vector3 (0, -90, 0));
 
+		}
+	}
+
+	/// <summary>
+	/// 半笑い花火作成
+	/// </summary>
+	private void createSmaileFaceFireworks() {
+
+		Transform player = GameObject.Find ("Player").transform;
+
+		if (player != null) {
+			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
+
+			Vector3 pointList = mainPlayer.transform.position;
+			GameObject prefab = (GameObject)Resources.Load ("Prefab/16-FaceSeedObject");
+
+			pointList.x += 1200;
+			pointList.y += 100;
+			pointList.z += 0;
+
+			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
+			newGameObject.transform.Rotate (new Vector3 (-90, 0, 140));
 		}
 	}
 
