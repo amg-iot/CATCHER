@@ -5,8 +5,10 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using MiniJSON;
 using System.IO;
+using System.Text;
 
 public class PhotonNetServer : Photon.PunBehaviour {
+	private string g_JsonStr = "";
 
 	private GameObject gameObject = null;
 
@@ -51,19 +53,19 @@ public class PhotonNetServer : Photon.PunBehaviour {
 			}
 		} catch (UnityException e) {}
 
-        DirectoryInfo dir = new DirectoryInfo(Application.dataPath + "/Resources/Save/" );
-        FileInfo[] info = dir.GetFiles("*.txt");
-		foreach(FileInfo f in info){
-			Debug.Log( f.Name );
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/FileLabel");
-			GameObject newGameObject = Instantiate (perefab, content.sizeDelta, Quaternion.identity);
-			newGameObject.transform.SetParent(content, false);
-			//ボタンのテキスト変更
-			newGameObject.transform.GetComponentInChildren<Text>().text = "    " + f.Name;
-			string name = f.Name;
-			//ボタンのクリックイベント登録
-			newGameObject.transform.GetComponent<Button>().onClick.AddListener(() => OnClick(name));
-		}
+        // DirectoryInfo dir = new DirectoryInfo(Application.dataPath + "/Resources/Save/" );
+        // FileInfo[] info = dir.GetFiles("*.txt");
+		// foreach(FileInfo f in info){
+		// 	Debug.Log( f.Name );
+		// 	GameObject perefab = (GameObject)Resources.Load ("Prefab/FileLabel");
+		// 	GameObject newGameObject = Instantiate (perefab, content.sizeDelta, Quaternion.identity);
+		// 	newGameObject.transform.SetParent(content, false);
+		// 	//ボタンのテキスト変更
+		// 	newGameObject.transform.GetComponentInChildren<Text>().text = "    " + f.Name;
+		// 	string name = f.Name;
+		// 	//ボタンのクリックイベント登録
+		// 	newGameObject.transform.GetComponent<Button>().onClick.AddListener(() => OnClick(name));
+		// }
 	}
 
 	/**
@@ -96,25 +98,38 @@ public class PhotonNetServer : Photon.PunBehaviour {
 		TextReader txtReader = null;
 		string description = "";
 		
-#if UNITY_EDITOR
 		Debug.Log( Application.streamingAssetsPath );
-		path = Application.streamingAssetsPath + "/" + textFileName;
+		//path = Application.streamingAssetsPath + "/" + textFileName;
+		path = Application.dataPath + "/StreamingAssets" + "/" + textFileName;
 		Debug.Log("filepath:"+path);
+
 		FileStream file = new FileStream(path,FileMode.Open,FileAccess.Read);
-		txtReader = new StreamReader(file);
-		yield return new WaitForSeconds(0f);
-#elif UNITY_ANDROID
-		path = "jar:file://" + Application.dataPath + "!/assets" + "/" + textFileName;
-		WWW www = new WWW(path);
-		yield return www;
-		txtReader = new StringReader(www.text);
-#endif
-		// while((txtBuffer = txtReader.ReadLine()) != null){
-		// 	description = description + txtBuffer + "\r\n";
-		// }
-		description = txtReader.ReadToEnd();
-		Debug.Log("description:"+description);
-		sendClient (description);
+		if (file != null) {
+			txtReader = new StreamReader(file);
+
+			if (txtReader != null) {
+				yield return new WaitForSeconds(0f);
+				description = txtReader.ReadToEnd();
+				
+				var properties  = new ExitGames.Client.Photon.Hashtable();
+				properties.Add( "startSendJson", "" );
+				PhotonNetwork.room.SetCustomProperties( properties );
+
+				int num = 0;
+				//string[] result = mbStrSplit(description, 10000);
+				string[] result = mbStrSplit(description, 1000);
+				foreach ( var jsonData in result )
+				{
+					var properties2  = new ExitGames.Client.Photon.Hashtable();
+					properties2.Add( "sendJson", jsonData );
+					PhotonNetwork.room.SetCustomProperties( properties2 );
+				}
+				
+				var properties3  = new ExitGames.Client.Photon.Hashtable();
+				properties3.Add( "endSendJson", "" );
+				PhotonNetwork.room.SetCustomProperties( properties3 );
+			}
+		}
 
 		yield return description;
 	}
@@ -128,12 +143,57 @@ public class PhotonNetServer : Photon.PunBehaviour {
 		StartCoroutine( LoadText(fileNameInputField.text) );
 	}
 
-	private void sendClient(string data) {
-
-		string repText = data.Replace("\r\n", "");
-		var properties  = new ExitGames.Client.Photon.Hashtable();
-		properties.Add( "jsonText", repText );
-		PhotonNetwork.room.SetCustomProperties( properties );
+	//*********************************************************************
+	/// <summary>文字列を指定した文字数単位で分割する(全角文字考慮)
+	/// </summary>
+	/// <param name="inStr">  分割前文字列</param>
+	/// <param name="length"> 1行の長さ</param>
+	/// <returns>             分割後文字列の配列</returns>
+	//*********************************************************************
+	private string[] mbStrSplit( string inStr, int length ) {
+		List<string> outArray = new List<string>(); // 分割結果の保存領域
+		string       outStr   = "";                 // 現在処理中の分割後文字列
+		Encoding     enc      = Encoding.GetEncoding("UTF-8");
+	
+		// パラメータチェック
+		if ( inStr == null || length < 1 ) {
+			return outArray.ToArray();
+		}
+	
+		//--------------------------------------
+		// 全ての文字を処理するまで繰り返し
+		//--------------------------------------
+		for ( int offset = 0; offset < inStr.Length ; offset++ ) {
+			//----------------------------------------------------------
+			// 今回処理する文字と、その文字を含めた分割後文字列長を取得
+			//----------------------------------------------------------
+			string curStr         = inStr[offset].ToString();
+			int    curTotalLength = enc.GetByteCount( outStr ) + enc.GetByteCount( curStr );
+	
+			//-------------------------------------
+			// この文字が、分割点になるかチェック
+			//-------------------------------------
+			if ( curTotalLength == length ) {
+				// 処理中の文字を含めると、ちょうどピッタリ
+				outArray.Add( outStr + curStr );
+				outStr = "";
+			} else if ( curTotalLength > length ) {
+				// 処理中の文字を含めると、あふれる
+				outArray.Add( outStr );
+				outStr = curStr;
+			} else {
+				// 処理中の文字を含めてもまだ余裕あり
+				outStr += curStr;
+			}
+		}
+	
+		// 最後の行の文を追加する
+		if ( !outStr.Equals( "" ) ) {
+			outArray.Add( outStr );
+		}
+	
+		// 分割後データを配列に変換して返す
+		return outArray.ToArray();
 	}
 
 	/**
@@ -166,4 +226,25 @@ public class PhotonNetServer : Photon.PunBehaviour {
 		// }
 
 	}
+
+	// /**
+	// * サーバー側からのデータ送信時に呼び出される.
+	// */
+	// public void OnPhotonCustomRoomPropertiesChanged( ExitGames.Client.Photon.Hashtable changedProperties ){
+	// 	object value = null;
+
+	// 	if (changedProperties.TryGetValue ("startSendJson", out value)) {
+	// 		g_JsonStr = "";
+	// 	}
+	// 	else if (changedProperties.TryGetValue ("sendJson", out value)) {
+	// 		g_JsonStr += (string)value;
+	// 	}
+	// 	else if (changedProperties.TryGetValue ("endSendJson", out value)) {
+	// 		// ルームプロパティから花火のデータを取得
+	// 		try {
+	// 			string repText = g_JsonStr.Replace("\r\n", "");
+	// 		} catch {
+	// 		}
+	// 	}
+	// }
 }

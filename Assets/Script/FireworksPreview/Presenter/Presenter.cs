@@ -5,6 +5,7 @@ using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using MiniJSON;
 
 /*
  * 
@@ -90,30 +91,125 @@ public class Presenter : MonoBehaviour {
 	}
 	
 	/**
+	* JSONデータのパースを行う.
+	*/
+	private JsonData readJsonData(string text) {
+		JsonData jsonData = new JsonData();
+		
+		long count = 0;
+		IList familyList = (IList)Json.Deserialize(text);
+		PersonalData[] personalDataList = new PersonalData[familyList.Count];
+		foreach(IDictionary json in familyList){
+			personalDataList[count] = new PersonalData();
+
+			if (json.Contains("author")) {
+				personalDataList[count].author = (string) json["author"];
+				Debug.Log((string) json["author"]);
+			}
+			if (json.Contains("sex")) {
+				personalDataList[count].sex = (string) json["sex"];
+				Debug.Log((string) json["sex"]);
+			}
+			if (json.Contains("name")) {
+				personalDataList[count].name = (string) json["name"];
+				Debug.Log((string) json["name"]);
+			}
+			if (json.Contains("y")) {
+				personalDataList[count].y = (long) json["y"];
+				Debug.Log((long) json["y"]);
+			}
+			if (json.Contains("speed")) {
+				personalDataList[count].speed = (long) json["speed"];
+				Debug.Log((long) json["speed"]);
+			}
+
+			long num = 0;
+			IList elem = (IList)json["bulletArr"];
+			BulletArr[] bulletArrList = new BulletArr[elem.Count];
+			foreach (IDictionary item in elem)
+			{
+				bulletArrList[num] = new BulletArr();
+
+				if (item.Contains("type")) {
+					bulletArrList[num].type = (string) item["type"];
+					Debug.Log((string) item["type"]);
+				}
+				if (item.Contains("speed")) {
+					bulletArrList[num].speed = 0;
+					// bulletArrList[num].speed = (long) item["speed"];
+					// Debug.Log((long) item["speed"]);
+				}
+				if (item.Contains("color")) {
+					bulletArrList[num].color = (long) item["color"];
+					Debug.Log((long) item["color"]);
+				}
+				if (item.Contains("degree")) {
+					bulletArrList[num].degree = (long) item["degree"];
+					Debug.Log((long) item["degree"]);
+				}
+				if (item.Contains("rectWidth")) {
+					bulletArrList[num].rectWidth = (long) item["rectWidth"];
+					Debug.Log((long) item["rectWidth"]);
+				}
+				if (item.Contains("rectHeight")) {
+					bulletArrList[num].rectHeight = (long) item["rectHeight"];
+					Debug.Log((long) item["rectHeight"]);
+				}
+				num++;
+			}
+			personalDataList[count].bulletArr = bulletArrList;
+			count++;
+		}
+		jsonData.party = personalDataList;
+
+		return jsonData;
+	}
+
+	IEnumerator goHanabi(string data) {
+
+		i_run = true;
+		JsonData jsonData = new JsonData();
+
+		bool b_ok = true;
+		// ルームプロパティから花火のデータを取得
+		try {
+
+			string repText = data.Replace("\r\n", "");
+			jsonData = readJsonData(repText);
+		} catch {
+			b_ok = false;
+		}
+
+		if (b_ok) {
+			canvasWaitGroup = GameObject.Find("WaitCanvas").GetComponent<CanvasGroup>();
+			canvasWaitGroup.alpha = 0;
+
+			var collection = new ReactiveCollection<PersonalData>();
+
+			collection
+			.ObserveAdd()
+			.Subscribe(x =>
+			{
+				_view.ViewFireworks((PersonalData) x.Value);
+			});
+
+			foreach(PersonalData party in  jsonData.party){
+				collection.Add(party);
+				yield return new WaitForSeconds(0.5f);
+			}
+		}
+
+		yield return true;
+	}
+
+	/**
 	* 開始関数.
 	*/
-	public void StartHanabi (JsonData data) {
+	public void StartHanabi (string data) {
 
 		if (i_run) {
 			return;
 		}
-
-		//i_run = true;
-		canvasWaitGroup = GameObject.Find("WaitCanvas").GetComponent<CanvasGroup>();
-		canvasWaitGroup.alpha = 0;
-
-		var collection = new ReactiveCollection<PersonalData>();
-
-		collection
-		.ObserveAdd()
-		.Subscribe(x =>
-		{
-			_view.ViewFireworks((PersonalData) x.Value);
-			//Debug.Log(string.Format("Add [{0}] = {1}", x.Index, x.Value));
-		});
-
-		foreach(PersonalData party in  data.party){
-			collection.Add(party);
-		}
+		StartCoroutine( goHanabi(data) );
 	}
 }

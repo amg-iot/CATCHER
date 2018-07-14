@@ -338,7 +338,7 @@ public class View : MonoBehaviour {
 			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
 
 			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/11-MickyWithFaceSeedObject");
+			GameObject perefab = (GameObject)Resources.Load ("Prefab/11-MichyOutlineWithFaceSeedObject");
 
 			pointList.y += 350;
 			pointList.z -= 1800;

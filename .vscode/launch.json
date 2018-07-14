@@ -1,7 +1,6 @@
 {
 	"version": "0.2.0",
 	"configurations": [
-
 		{
 			"name": "Unity Editor",
 			"type": "unity",
@@ -10,7 +9,7 @@
 		{
 			"name": "Windows Player",
 			"type": "unity",
-			"request": "attach"
+			"request": "launch"
 		},
 		{
 			"name": "OSX Player",
