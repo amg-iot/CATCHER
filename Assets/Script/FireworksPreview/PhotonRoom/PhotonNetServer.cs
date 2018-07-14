@@ -98,7 +98,8 @@ public class PhotonNetServer : Photon.PunBehaviour {
 		
 #if UNITY_EDITOR
 		Debug.Log( Application.streamingAssetsPath );
-		path = Application.streamingAssetsPath + "\\" + textFileName;
+		path = Application.streamingAssetsPath + "/" + textFileName;
+		Debug.Log("filepath:"+path);
 		FileStream file = new FileStream(path,FileMode.Open,FileAccess.Read);
 		txtReader = new StreamReader(file);
 		yield return new WaitForSeconds(0f);
@@ -112,6 +113,7 @@ public class PhotonNetServer : Photon.PunBehaviour {
 		// 	description = description + txtBuffer + "\r\n";
 		// }
 		description = txtReader.ReadToEnd();
+		Debug.Log("description:"+description);
 		sendClient (description);
 
 		yield return description;
