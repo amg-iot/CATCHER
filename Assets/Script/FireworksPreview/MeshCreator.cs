@@ -41,32 +41,32 @@ public class MeshCreator : MonoBehaviour
 		if (pattern == MESH_TYPE_CIRCLE_BIG) {
 			/* １重の円周（大） */
 			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 100, new CirclePoints ());
-		
+
 		} else if (pattern == MESH_TYPE_CIRCLE_MEDIUM) {
 			/* 1重の円周　(中) */
 			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 75, new CirclePoints ());			
-			 
+
 		} else if (pattern == MESH_TYPE_CIRCLE_SMALL) {
 			/* 1重の円周　(小) */
 			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 50, new CirclePoints ());
-		
+
 		} else if (pattern >= 8 && pattern <= 19) {
 			/* 放射状（中心は空洞） */
 			return CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 100, 0), 
-				new Vector3 ( 2, 100, 0), 
-				new Vector3 ( 2,  40, 0), 
-				new Vector3 (-2,  40, 0),
-				30*(pattern - 8)
+				new Vector3 (2, 100, 0), 
+				new Vector3 (2, 40, 0), 
+				new Vector3 (-2, 40, 0),
+				30 * (pattern - 8)
 			);
-	
+
 		} else if (pattern == 20) {
 			/* 「火」の真ん中の棒 */
 			return CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 40, 0), 
-				new Vector3 ( 2, 40, 0), 
-				new Vector3 ( 2,  0, 0), 
-				new Vector3 (-2,  0, 0),
+				new Vector3 (2, 40, 0), 
+				new Vector3 (2, 0, 0), 
+				new Vector3 (-2, 0, 0),
 				0
 			);
 
@@ -74,28 +74,28 @@ public class MeshCreator : MonoBehaviour
 			/* 「火」の左払い */
 			return CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 40, 0), 
-				new Vector3 ( 2, 40, 0), 
-				new Vector3 ( 2,  0, 0), 
-				new Vector3 (-2,  0, 0),
+				new Vector3 (2, 40, 0), 
+				new Vector3 (2, 0, 0), 
+				new Vector3 (-2, 0, 0),
 				-135
 			);
-		
+
 		} else if (pattern == 22) {
 			/* 「火」の右払い */
 			return CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 40, 0), 
-				new Vector3 ( 2, 40, 0), 
-				new Vector3 ( 2,  0, 0), 
-				new Vector3 (-2,  0, 0),
+				new Vector3 (2, 40, 0), 
+				new Vector3 (2, 0, 0), 
+				new Vector3 (-2, 0, 0),
 				135
 			);
-		
+
 		} else if (pattern == 23) {
 			/* 「火」の左の点 */
 			return CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 35, 0), 
-				new Vector3 ( 2, 35, 0), 
-				new Vector3 ( 2, 30, 0), 
+				new Vector3 (2, 35, 0), 
+				new Vector3 (2, 30, 0), 
 				new Vector3 (-2, 30, 0),
 				-45
 			);
@@ -104,8 +104,8 @@ public class MeshCreator : MonoBehaviour
 			/* 「火」の右の点 */
 			return CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 35, 0), 
-				new Vector3 ( 2, 35, 0), 
-				new Vector3 ( 2, 30, 0), 
+				new Vector3 (2, 35, 0), 
+				new Vector3 (2, 30, 0), 
 				new Vector3 (-2, 30, 0),
 				45
 			);
@@ -113,13 +113,13 @@ public class MeshCreator : MonoBehaviour
 		} else if (pattern == MESH_TYPE_MICHY) {
 			/* ミッキー型 */
 			return CreateMickyMesh ();
-		
+
 		} else if (pattern == 26) {
 			/* ミッキー(顔あり)型 左目*/
 			return  CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 35, 0), 
-				new Vector3 ( 2, 35, 0), 
-				new Vector3 ( 2, 30, 0), 
+				new Vector3 (2, 35, 0), 
+				new Vector3 (2, 30, 0), 
 				new Vector3 (-2, 30, 0),
 				-45
 			);
@@ -128,8 +128,8 @@ public class MeshCreator : MonoBehaviour
 			/* ミッキー(顔あり)型 右目*/
 			return  CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 35, 0), 
-				new Vector3 ( 2, 35, 0), 
-				new Vector3 ( 2, 30, 0), 
+				new Vector3 (2, 35, 0), 
+				new Vector3 (2, 30, 0), 
 				new Vector3 (-2, 30, 0),
 				45
 			);
@@ -138,8 +138,8 @@ public class MeshCreator : MonoBehaviour
 			/* ミッキー(顔あり)型 口*/
 			return  CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 40, 0), 
-				new Vector3 ( 2, 40, 0), 
-				new Vector3 ( 2, 30, 0), 
+				new Vector3 (2, 40, 0), 
+				new Vector3 (2, 30, 0), 
 				new Vector3 (-2, 30, 0),
 				180
 			);
@@ -160,11 +160,19 @@ public class MeshCreator : MonoBehaviour
 			/* ミッキー（輪郭のみ）左目 */
 			return CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 35, 0), 
-				new Vector3 ( 2, 35, 0), 
-				new Vector3 ( 2, 30, 0), 
+				new Vector3 (2, 35, 0), 
+				new Vector3 (2, 30, 0), 
 				new Vector3 (-2, 30, 0),
 				-45
 			);
+
+		} else if (pattern == 33) {
+			// ハート型
+			return CreateHeartMesh (new Vector3 (0, 0, 0), 5, new CirclePoints ());
+
+		} else if (pattern == MESH_TYPE_SPIRAL) {
+			/* 螺旋型 */
+			return CreateSpiralMesh(new Vector3(0, 0, 0));
 
 		} else if (pattern == 160) {
 			/* 顔：１重の円周（小） */
@@ -229,16 +237,12 @@ public class MeshCreator : MonoBehaviour
 				new Vector3 (-1,  0, 0),
 				40
 			);
-
-		} else if (pattern == MESH_TYPE_SPIRAL) {
-			/* 螺旋型 */
-			return CreateSpiralMesh(new Vector3(0, 0, 0));
-
 		}
+
 
 		return new Mesh ();
 	}
-			
+
 	/// <summary>
 	/// 四角形のメッシュを作成
 	/// </summary>
@@ -283,7 +287,7 @@ public class MeshCreator : MonoBehaviour
 		vertextList.Add(point2); //2番頂点
 
 		indexList.AddRange(new []{
-			1,2,3
+			0,2,1
 		});//0-2-1の頂点で1三角形。 1-2-3の頂点で1三角形。
 
 		mesh.RecalculateNormals (); // 法線方向を(0,0,1) 固定にしない
@@ -313,12 +317,12 @@ public class MeshCreator : MonoBehaviour
 			vertextList.Add(new Vector3((float)x + theOrigin.x, (float)y + theOrigin.y,  + theOrigin.z));
 
 		}
-			
+
 		// 三角形の座標の組み合わせを設定
 		for (int i=0; i < 360 * spiral_num * density; i++) {
 			indexList.Add(i);
 		}
-			
+
 		mesh.RecalculateNormals (); // 法線方向を(0,0,1) 固定にしない
 		mesh.SetVertices(vertextList);//meshに頂点群をセット
 		mesh.SetIndices(indexList.ToArray(),MeshTopology.Triangles, 0); //メッシュにどの頂点の順番で面を作るかセット
@@ -355,7 +359,7 @@ public class MeshCreator : MonoBehaviour
 		return mesh;
 
 	}
-			
+
 	/// <summary>
 	/// 円を近似する三角形の頂点の座標と、組み合わせを返す
 	/// </summary>
@@ -403,7 +407,7 @@ public class MeshCreator : MonoBehaviour
 			}
 
 		}
-			
+
 		return cpoints;
 	}
 
@@ -411,7 +415,7 @@ public class MeshCreator : MonoBehaviour
 	/// 円周形のMeshを返す
 	/// </summary>
 	/// <returns>The circumference mesh.</returns>
-	private Mesh CreateCircumferenceMesh(Vector3 theOrigin, int CircleSize, CirclePoints cpoints) {
+	private Mesh CreateCircumferenceMesh(Vector3 theOrigin, float CircleSize, CirclePoints cpoints) {
 
 		Mesh mesh = new Mesh ();
 
@@ -431,13 +435,36 @@ public class MeshCreator : MonoBehaviour
 	}
 
 	/// <summary>
+	/// ハート形のMeshを返す
+	/// </summary>
+	/// <returns>The circumference mesh.</returns>
+	private Mesh CreateHeartMesh(Vector3 theOrigin, float CircleSize, CirclePoints cpoints) {
+
+		Mesh mesh = new Mesh ();
+
+		// 構造体の初期化
+		cpoints.vertextList = new List<Vector3>();
+		cpoints.indexList = new List<int>();
+
+		cpoints = CreateHeartPoints(theOrigin, CircleSize, cpoints);
+
+		// Meshの作成
+		mesh.RecalculateNormals (); // 法線方向を(0,0,1) 固定にしない
+		mesh.SetVertices(cpoints.vertextList);//meshに頂点群をセット
+		mesh.SetIndices(cpoints.indexList.ToArray(), MeshTopology.Triangles, 0); //メッシュにどの頂点の順番で面を作るかセット
+
+		return mesh;
+
+	}
+
+	/// <summary>
 	/// 円周Mesh作成用の座標を返す
 	/// </summary>
 	/// <returns>The circumference points.</returns>
 	/// <param name="theOrigin">The origin.</param>
 	/// <param name="CircleSize">Circle size.</param>
 	/// <param name="cpoints">Cpoints.</param>
-	private CirclePoints CreateCircumferencePoints(Vector3 theOrigin, int CircleSize, CirclePoints cpoints)
+	private CirclePoints CreateCircumferencePoints(Vector3 theOrigin, float CircleSize, CirclePoints cpoints)
 	{
 
 		var unit_angle = 1;
@@ -455,8 +482,38 @@ public class MeshCreator : MonoBehaviour
 
 		}
 
-		// 原点の番号を算出
-		int initTriangleNumSize = cpoints.indexList.Count / 3 + cpoints.indexList.Count / 3 / triangle_num;
+		// 座標と三角形の頂点を対応させる
+		for (int i=0; i < triangle_num; i++) {
+			cpoints.indexList.Add(i);
+		}
+
+		return cpoints;
+	}
+
+	/// <summary>
+	/// ハート型輪郭線の座標を返す
+	/// </summary>
+	/// <returns>The circumference points.</returns>
+	/// <param name="theOrigin">The origin.</param>
+	/// <param name="CircleSize">Circle size.</param>
+	/// <param name="cpoints">Cpoints.</param>
+	private CirclePoints CreateHeartPoints(Vector3 theOrigin, float CircleSize, CirclePoints cpoints)
+	{
+
+		double increment = 0.0005;
+		var triangle_num = Math.PI * 2 / increment;
+		int ii = 0;
+
+		for (double t = -Math.PI/2; t < 3 * Math.PI / 2; t+=increment) {
+
+			var x = 16 * Math.Sin (t) * Math.Sin (t) * Math.Sin(t);
+			var y = 13 * Math.Cos (t) - 5 * Math.Cos (2 * t) - 2 * Math.Cos (3 * t) - Math.Cos (4 * t);
+
+			cpoints.vertextList.Add(
+				new Vector3((float)x*CircleSize, (float)y*CircleSize, 0) + theOrigin
+			);
+
+		}
 
 		// 座標と三角形の頂点を対応させる
 		for (int i=0; i < triangle_num; i++) {

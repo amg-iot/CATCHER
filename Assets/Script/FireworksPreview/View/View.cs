@@ -28,6 +28,8 @@ public class View : MonoBehaviour {
 	{
 		BulletArr[] bulletArr = party.bulletArr;
 
+		Debug.Log ("bulletLength:" + bulletArr.Length);
+
 		if (bulletArr.Length == 0) {
 			/** 球型 （テスト用）*/
 			createTestSphereFireworks ();
@@ -81,7 +83,7 @@ public class View : MonoBehaviour {
 		}
 		// ハート形
 		else if (bulletArr.Length == 38) {
-
+			createFireworksWithMeshObject ("Prefab/12-HeartSeedObject", 1);
 		}
 		// 花形2?
 		else if (bulletArr.Length == 32) {
@@ -125,7 +127,10 @@ public class View : MonoBehaviour {
 			// デモ用
 		} else if (bulletArr.Length == 9999) {
 			createDemoFireworks ();
-		}
+		
+		} else {
+		Debug.Log ("No fireworks found");
+	}
 
 		return true;
 	}
@@ -494,6 +499,29 @@ public class View : MonoBehaviour {
 
 		}
 	}
+
+	/// <summary>
+	/// メッシュで作成された花火を実体化する
+	/// </summary>
+	private void createFireworksWithMeshObject(string prehabPath, int childObjectNum) {
+
+		Transform player = GameObject.Find ("Player").transform;
+		if (player != null) {
+			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
+			Vector3 pointList = mainPlayer.transform.position;
+			GameObject prefab = (GameObject)Resources.Load (prehabPath);
+			pointList.z -= 1800;
+			pointList.y += 500;
+			GameObject seedObject = Instantiate (prefab, pointList, Quaternion.identity);
+			seedObject.transform.Rotate (new Vector3 (-90, 0, 0));
+			for (int i=0; i<childObjectNum; i++) {
+				// 重力方向に向きを修正
+				GameObject childObject = seedObject.transform.GetChild (i).gameObject;
+				childObject.transform.Rotate (new Vector3 (0, -90, -90));
+			}
+		}
+	}
+
 
 	/// <summary>
 	/// 扇の取得慮タイプ判定
