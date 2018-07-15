@@ -137,10 +137,10 @@ public class MeshCreator : MonoBehaviour
 		} else if (pattern == 28) {
 			/* ミッキー(顔あり)型 口*/
 			return  CreatePlaneMeshWithRotation (
-				new Vector3 (-2, 40, 0), 
-				new Vector3 (2, 40, 0), 
-				new Vector3 (2, 30, 0), 
-				new Vector3 (-2, 30, 0),
+				new Vector3 (-40, -10, 0), 
+				new Vector3 (-38, -10, 0), 
+				new Vector3 (-40,  10, 0),
+				new Vector3 (-38,  10, 0), 
 				180
 			);
 
@@ -160,13 +160,23 @@ public class MeshCreator : MonoBehaviour
 			/* ミッキー（輪郭のみ）左目 */
 			return CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 35, 0), 
-				new Vector3 (2, 35, 0), 
-				new Vector3 (2, 30, 0), 
+				new Vector3 ( 2, 35, 0), 
+				new Vector3 ( 2, 30, 0), 
 				new Vector3 (-2, 30, 0),
-				-45
+				0
 			);
 
 		} else if (pattern == 33) {
+			/* ミッキー（輪郭のみ）目 */
+			return CreatePlaneMeshWithRotation (
+				new Vector3 (-2, -35, 0), 
+				new Vector3 ( 2, -35, 0), 
+				new Vector3 ( 2, -30, 0), 
+				new Vector3 (-2, -30, 0),
+				0
+			);
+
+		} else if (pattern == 34) {
 			// ハート型
 			return CreateHeartMesh (new Vector3 (0, 0, 0), 5, new CirclePoints ());
 

@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4565313275308296}
   - component: {fileID: 198127156014216680}
   - component: {fileID: 199049515677800664}
+  - component: {fileID: 114271530607662680}
   m_Layer: 0
   m_Name: FanningFireworksObject
   m_TagString: Untagged
@@ -51,13 +52,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1871679706175050}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: 1.083252, y: 0.6353761, z: -0.64431}
-  m_LocalScale: {x: 1.0000001, y: 1.0000002, z: 1.0000002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children: []
   m_Father: {fileID: 4976936386837946}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: -90.00001, z: -90.00001}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4976936386837946
 Transform:
   m_ObjectHideFlags: 1
@@ -72,6 +73,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -108.02, y: 0, z: 0}
+--- !u!114 &114271530607662680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871679706175050}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70664a7e7a02d49b18ac32778403f23b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultScale: {x: 0, y: 0, z: 0}
 --- !u!198 &198127156014216680
 ParticleSystem:
   m_ObjectHideFlags: 1

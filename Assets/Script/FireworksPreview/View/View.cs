@@ -14,7 +14,7 @@ using System.Threading;
 public class View : MonoBehaviour {
 
 	public int m_run_count = 0;
-	
+
 	[SerializeField]
 	public delegate void OnSumButtonChildClicked(PointerEventData data); // delegate 型の宣言
 
@@ -64,13 +64,10 @@ public class View : MonoBehaviour {
 			// 花火の生成
 			newFanningFireworks(direction);
 		}
-		// 花形？
-		else if (bulletArr.Length == 48) {
-
-		}
 		// 「火」
 		else if (bulletArr.Length == 21) {
-			createKanjiHiFireworks ();
+			createFireworksWithMeshObject ("Prefab/09-KanjiFireSeedObject", 5);
+
 		}
 		// ミッキー型
 		else if (bulletArr.Length == 26) {
@@ -78,7 +75,7 @@ public class View : MonoBehaviour {
 		}
 		// ミッキー型(顔あり)
 		else if (bulletArr.Length == 33) {
-			createMichyOutlineWithFaceFireworks ();
+			createFireworksWithMeshObject ("Prefab/11-MichyOutlineWithFaceSeedObject", 6);
 
 		}
 		// ハート形
@@ -127,10 +124,10 @@ public class View : MonoBehaviour {
 			// デモ用
 		} else if (bulletArr.Length == 9999) {
 			createDemoFireworks ();
-		
+
 		} else {
-		Debug.Log ("No fireworks found");
-	}
+			Debug.Log ("No fireworks found");
+		}
 
 		return true;
 	}
@@ -250,7 +247,7 @@ public class View : MonoBehaviour {
 	/// </summary>
 	/// <param name="direction">扇型の向き(上:0、左:1, 下:2, 右:3)</param>
 	private void newFanningFireworks(int direction) {
-		
+
 		Transform player = GameObject.Find ("Player").transform;
 		if (player != null) {
 			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
@@ -258,8 +255,8 @@ public class View : MonoBehaviour {
 			Vector3 pointList = mainPlayer.transform.position;
 			GameObject prefab = (GameObject)Resources.Load ("Prefab/04-07-FanningSeedObject");
 
-			pointList.y += 10;
-			pointList.z += 100;
+			pointList.z -= 1800;
+			pointList.y += 500;
 
 			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
 			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
@@ -267,9 +264,9 @@ public class View : MonoBehaviour {
 			if (prefab.activeSelf) {
 				// 子要素のFireworksObjectの角度を調整
 				GameObject childObject = newGameObject.transform.GetChild(0).gameObject;
-				childObject.transform.Rotate (new Vector3 (-90, 0, 225+(90 * direction) /*向き調整*/));
+				childObject.transform.Rotate (new Vector3 (0, 90, 225+(90 * direction) /*向き調整*/));
 			}
-	
+
 		}
 	}
 
@@ -286,8 +283,8 @@ public class View : MonoBehaviour {
 			Vector3 pointList = mainPlayer.transform.position;
 			GameObject prefab = (GameObject)Resources.Load ("Prefab/09-KanjiFireSeedObject");
 
-			pointList.y += 10;
-			pointList.z += 150;
+			pointList.z -= 1800;
+			pointList.y += 500;
 			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
 			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
 
@@ -338,7 +335,7 @@ public class View : MonoBehaviour {
 			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
 
 			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/11-MichyOutlineWithFaceSeedObject");
+			GameObject perefab = (GameObject)Resources.Load ("Prefab/11-MickyWithFaceSeedObject");
 
 			pointList.y += 350;
 			pointList.z -= 1800;
@@ -463,7 +460,7 @@ public class View : MonoBehaviour {
 
 		}
 	}
-		
+
 	/// <summary>
 	/// デモ用の花火作成
 	/// Creates the demo fireworks.
