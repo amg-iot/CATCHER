@@ -96,15 +96,17 @@ public class View : MonoBehaviour {
 		}   
 		// 半笑い
 		else if (bulletArr.Length == 31) {
-			createSmaileFaceFireworks ();
+			createFireworksWithMeshObject ("Prefab/16-FaceSeedObject", 4);
+
 		}    
 		// アイスクリーム
 		else if (bulletArr.Length == 24) {
-			createIceCreamFireworks ();
+			createFireworksWithMeshObject ("Prefab/17-IceCreamObject", 3);
+
 		}     
 		// モンスターボール
 		else if (bulletArr.Length == 102) {
-			createMonstarBallFireworks ();
+			createFireworksWithMeshObject ("Prefab/18-MonstarBallObject", 4);
 		}      
 		// ミッキー丸３つ
 		else if (bulletArr.Length == 3) {
@@ -352,7 +354,7 @@ public class View : MonoBehaviour {
 	/// <summary>
 	/// 半笑い花火作成
 	/// </summary>
-	private void createSmaileFaceFireworks() {
+	private void createSmileFaceFireworks() {
 
 		Transform player = GameObject.Find ("Player").transform;
 
@@ -367,7 +369,7 @@ public class View : MonoBehaviour {
 			pointList.z += 0;
 
 			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 140));
+			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
 		}
 	}
 

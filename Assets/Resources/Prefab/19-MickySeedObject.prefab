@@ -125,7 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e0b86115009b4be298850e3bf01167c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 19
+  type: 25
   meshFilter: {fileID: 33802070092645098}
 --- !u!198 &198539692189583476
 ParticleSystem:

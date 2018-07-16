@@ -15,7 +15,7 @@ public class MeshCreator : MonoBehaviour
 	private const int MESH_TYPE_CIRCLE_MEDIUM = 2;
 	private const int MESH_TYPE_CIRCLE_SMALL = 3;
 	private const int MESH_TYPE_MICHY = 25;
-	private const int MESH_TYPE_SPIRAL = 22;
+	private const int MESH_TYPE_SPIRAL = 35;
 
 	[SerializeField]
 	private MeshFilter meshFilter;
@@ -139,8 +139,8 @@ public class MeshCreator : MonoBehaviour
 			return  CreatePlaneMeshWithRotation (
 				new Vector3 (-40, -10, 0), 
 				new Vector3 (-38, -10, 0), 
-				new Vector3 (-40,  10, 0),
-				new Vector3 (-38,  10, 0), 
+				new Vector3 (-40, 10, 0),
+				new Vector3 (-38, 10, 0), 
 				180
 			);
 
@@ -160,8 +160,8 @@ public class MeshCreator : MonoBehaviour
 			/* ミッキー（輪郭のみ）左目 */
 			return CreatePlaneMeshWithRotation (
 				new Vector3 (-2, 35, 0), 
-				new Vector3 ( 2, 35, 0), 
-				new Vector3 ( 2, 30, 0), 
+				new Vector3 (2, 35, 0), 
+				new Vector3 (2, 30, 0), 
 				new Vector3 (-2, 30, 0),
 				0
 			);
@@ -170,8 +170,8 @@ public class MeshCreator : MonoBehaviour
 			/* ミッキー（輪郭のみ）目 */
 			return CreatePlaneMeshWithRotation (
 				new Vector3 (-2, -35, 0), 
-				new Vector3 ( 2, -35, 0), 
-				new Vector3 ( 2, -30, 0), 
+				new Vector3 (2, -35, 0), 
+				new Vector3 (2, -30, 0), 
 				new Vector3 (-2, -30, 0),
 				0
 			);
@@ -182,7 +182,7 @@ public class MeshCreator : MonoBehaviour
 
 		} else if (pattern == MESH_TYPE_SPIRAL) {
 			/* 螺旋型 */
-			return CreateSpiralMesh(new Vector3(0, 0, 0));
+			return CreateSpiralMesh (new Vector3 (0, 0, 0));
 
 		} else if (pattern == 160) {
 			/* 顔：１重の円周（小） */
@@ -195,15 +195,15 @@ public class MeshCreator : MonoBehaviour
 		} else if (pattern == 162) {
 			/* 顔：１重の円周（大） */
 			return CreateCircumferenceMesh (new Vector3 (0, 0, 0), 100, new CirclePoints ());
-
+				
 		} else if (pattern == 163) {
 			/* 顔：口の線 */
 			return CreatePlaneMeshWithRotation (
-				new Vector3 (-1, 180, 90), 
-				new Vector3 ( 1, 180, 90), 
-				new Vector3 ( 1,  0, 0), 
-				new Vector3 (-1,  0, 0),
-				40
+				new Vector3 (-1, 45, 0), 
+				new Vector3 (1, 45, 0), 
+				new Vector3 (1, 0, 0), 
+				new Vector3 (-1, 0, 0),
+				0
 			);
 
 		} else if (pattern == 170) {
@@ -213,21 +213,21 @@ public class MeshCreator : MonoBehaviour
 		} else if (pattern == 171) {
 			/* アイス：左の線 */
 			return CreatePlaneMeshWithRotation (
-				new Vector3 (-1, 120, 0), 
-				new Vector3 ( 1, 120, 0), 
-				new Vector3 ( 1,  0, 0), 
-				new Vector3 (-1,  0, 0),
-				40
+				new Vector3 (-1, 180, 0), 
+				new Vector3 (1, 180, 0), 
+				new Vector3 (1, 0, 0), 
+				new Vector3 (-1, 0, 0),
+				60
 			);
 
 		} else if (pattern == 172) {
 			/* アイス：右の線 */
 			return CreatePlaneMeshWithRotation (
-				new Vector3 (-1, 90, 0), 
-				new Vector3 ( 1, 90, 0), 
-				new Vector3 ( 1,  0, 0), 
-				new Vector3 (-1,  0, 0),
-				40
+				new Vector3 (-1, 180, 0), 
+				new Vector3 (1, 180, 0), 
+				new Vector3 (1, 0, 0), 
+				new Vector3 (-1, 0, 0),
+				120
 			);
 
 		} else if (pattern == 180) {
@@ -241,13 +241,23 @@ public class MeshCreator : MonoBehaviour
 		} else if (pattern == 182) {
 			/* モンスターボール：真ん中の線 */
 			return CreatePlaneMeshWithRotation (
-				new Vector3 (-1, 180, 0), 
-				new Vector3 ( 1, 180, 0), 
-				new Vector3 ( 1,  0, 0), 
-				new Vector3 (-1,  0, 0),
-				40
+				new Vector3 (-1, 95, 0), 
+				new Vector3 ( 1, 95, 0), 
+				new Vector3 ( 1, 35, 0), 
+				new Vector3 (-1, 35, 0),
+				0
+			);
+		} else if (pattern == 183) {
+			/* モンスターボール：真ん中の線 */
+			return CreatePlaneMeshWithRotation (
+				new Vector3 (-1, -95, 0), 
+				new Vector3 ( 1, -95, 0), 
+				new Vector3 ( 1, -35, 0), 
+				new Vector3 (-1, -35, 0),
+				0
 			);
 		}
+
 
 
 		return new Mesh ();
