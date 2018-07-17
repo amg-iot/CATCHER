@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
 
 /*
  * 
@@ -21,22 +20,26 @@ public class View : MonoBehaviour {
 	[SerializeField]
 	public OnSumButtonChildClicked OnSumButtonClickedListener;
 
+	// 花火の打ち上げ地点の数
+	private const int LAUNCH_POINT_NUM = 3;
+
 	/**
 	* 花火を表示する.
 	*/
 	public bool ViewFireworks(PersonalData party)
 	{
+
 		BulletArr[] bulletArr = party.bulletArr;
 
 		Debug.Log ("bulletLength:" + bulletArr.Length);
 
 		if (bulletArr.Length == 0) {
 			/** 球型 （テスト用）*/
-			createTestSphereFireworks ();
+			createFireworksWithMeshObject ("Prefab/15-DefaultSeedObject", 1);
 		}
 		// １重の円周型
 		else if (bulletArr.Length == 18) {
-			createCircumferenceMonoFireworks ();
+			createFireworksWithMeshObject ("Prefab/01-CircumferenceMonoSeedObject", 1);
 		} 
 		// 2重の円周型・扇の下
 		else if (bulletArr.Length == 30) {
@@ -48,12 +51,12 @@ public class View : MonoBehaviour {
 				// 花火の生成
 				newFanningFireworks(direction);
 			} else {
-				createCircumferenceDoubleFireworks ();
+				createFireworksWithMeshObject ("Prefab/02-CircumferenceDoubleSeedObject", 2);
 			}
 		}
 		// 3重の円周型
 		else if (bulletArr.Length == 39) {
-			createCircumferenceTripleFireworks ();
+			createFireworksWithMeshObject ("Prefab/03-CircumferenceTripleSeedObject", 3);
 		}
 		// 扇型
 		else if (bulletArr.Length == 25) {
@@ -71,7 +74,8 @@ public class View : MonoBehaviour {
 		}
 		// ミッキー型
 		else if (bulletArr.Length == 26) {
-			createMichyOutlineFireworks ();
+			createFireworksWithMeshObject ("Prefab/10-MichyOutlineSeedObject", 3);
+
 		}
 		// ミッキー型(顔あり)
 		else if (bulletArr.Length == 33) {
@@ -89,7 +93,7 @@ public class View : MonoBehaviour {
 		// 花形3?
 		else if (bulletArr.Length == 48) {
 			/** 球型 */
-			createTestSphereFireworks ();
+			createFireworksWithMeshObject ("Prefab/15-DefaultSeedObject", 1);
 		}  
 		// すごく開くやつ
 		else if (bulletArr.Length == 90) {
@@ -110,7 +114,8 @@ public class View : MonoBehaviour {
 		}      
 		// ミッキー丸３つ
 		else if (bulletArr.Length == 3) {
-			createMichy3CirlesFireworks ();
+			createFireworksWithMeshObject ("Prefab/19-MickySeedObject", 1);
+
 		}       
 		// 手裏剣
 		else if (bulletArr.Length == 48) {
@@ -122,7 +127,8 @@ public class View : MonoBehaviour {
 		}
 		// 螺旋型
 		else if (bulletArr.Length == 76) {
-			createSpiralFireworks ();
+			createFireworksWithMeshObject ("Prefab/22-SpiralSeedObject", 1);
+
 			// デモ用
 		} else if (bulletArr.Length == 9999) {
 			createDemoFireworks ();
@@ -133,117 +139,7 @@ public class View : MonoBehaviour {
 
 		return true;
 	}
-
-	/// <summary>
-	/// Creates the test sphere fireworks.
-	/// </summary>
-	private void createTestSphereFireworks() {
-		Transform player = GameObject.Find ("Player").transform;
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/15-DefaultSeedObject");
-
-			pointList.z -= 1800;
-			pointList.y += 500;
-			GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-		}
-
-	}
-
-	/// <summary>
-	/// 1重の円周型の花火作成
-	/// </summary>
-	private void createCircumferenceMonoFireworks() {
-
-		Transform player = GameObject.Find ("Player").transform;
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/01-CircumferenceMonoSeedObject");
-
-			pointList.z -= 1800;
-			pointList.y += 500;
-			GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-
-			// 重力方向に向きを修正
-			GameObject childObject = newGameObject.transform.GetChild (0).gameObject;
-			childObject.transform.Rotate (new Vector3 (0, -90, -90));
-
-		}
-	}
-
-	/// <summary>
-	/// 2重の円周型の花火作成
-	/// </summary>
-	private void createCircumferenceDoubleFireworks(){
-
-		Transform player = GameObject.Find ("Player").transform;
-
-		Debug.Log ("02-CircumferenceDoubleSeedObject");
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/02-CircumferenceDoubleSeedObject");
-
-			pointList.z -= 1800;
-			pointList.y += 500;
-			GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-
-			// 重力方向に向きを修正
-			GameObject childObject = newGameObject.transform.GetChild (0).gameObject;
-			childObject.transform.Rotate (new Vector3 (0, -90, -90));
-
-			// 重力方向に向きを修正
-			GameObject childObject2 = newGameObject.transform.GetChild (1).gameObject;
-			childObject2.transform.Rotate (new Vector3 (0, -90, -90));
-
-		}
-	}
-
-	/// <summary>
-	/// 3重の円周型の花火作成
-	/// </summary>
-	private void createCircumferenceTripleFireworks(){
-		Transform player = GameObject.Find ("Player").transform;
-
-		Debug.Log ("03-CircumferenceTripleSeedObject");
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/03-CircumferenceTripleSeedObject");
-
-			pointList.z -= 1800;
-			pointList.y += 500;
-			GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-
-			// 重力方向に向きを修正
-			GameObject childObject = newGameObject.transform.GetChild (0).gameObject;
-			childObject.transform.Rotate (new Vector3 (0, -90, -90));
-
-			// 重力方向に向きを修正
-			GameObject childObject2 = newGameObject.transform.GetChild (1).gameObject;
-			childObject2.transform.Rotate (new Vector3 (0, -90, -90));
-
-			// 重力方向に向きを修正
-			GameObject childObject3 = newGameObject.transform.GetChild (2).gameObject;
-			childObject3.transform.Rotate (new Vector3 (0, -90, -90));
-		}
-
-	}
-
+		
 	/// <summary>
 	/// 扇型の花火を生成する
 	/// </summary>
@@ -253,12 +149,10 @@ public class View : MonoBehaviour {
 		Transform player = GameObject.Find ("Player").transform;
 		if (player != null) {
 			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
 			GameObject prefab = (GameObject)Resources.Load ("Prefab/04-07-FanningSeedObject");
 
-			pointList.z -= 1800;
-			pointList.y += 500;
+			// 花火の打ち上げ地点を設定
+			Vector3 pointList = calcLaunchPoint(mainPlayer);
 
 			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
 			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
@@ -271,198 +165,7 @@ public class View : MonoBehaviour {
 
 		}
 	}
-
-	/// <summary>
-	/// 「火」の花火を作成
-	/// </summary>
-	private void createKanjiHiFireworks() {
-
-		Transform player = GameObject.Find ("Player").transform;
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject prefab = (GameObject)Resources.Load ("Prefab/09-KanjiFireSeedObject");
-
-			pointList.z -= 1800;
-			pointList.y += 500;
-			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-
-		}
-	}
-
-	/// <summary>
-	/// ミッキー（輪郭のみ）花火作成
-	/// </summary>
-	private void createMichyOutlineFireworks() {
-
-		Transform player = GameObject.Find ("Player").transform;
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject prefab = (GameObject)Resources.Load ("Prefab/10-MichyOutlineSeedObject");
-
-			pointList.z -= 1800;
-			pointList.y += 500;
-			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-
-			// 重力方向に向きを修正
-			GameObject childObject = newGameObject.transform.GetChild (0).gameObject;
-			childObject.transform.Rotate (new Vector3 (0, -90, -90));
-
-			// 重力方向に向きを修正
-			GameObject childObject2 = newGameObject.transform.GetChild (1).gameObject;
-			childObject2.transform.Rotate (new Vector3 (0, -90, -90));
-
-			// 重力方向に向きを修正
-			GameObject childObject3 = newGameObject.transform.GetChild (2).gameObject;
-			childObject3.transform.Rotate (new Vector3 (0, -90, -90));
-		}
-
-	}
-
-	/// <summary>
-	/// ミッキー（輪郭のみ）花火作成
-	/// </summary>
-	private void createMichyOutlineWithFaceFireworks() {
-
-		Transform player = GameObject.Find ("Player").transform;
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/11-MickyWithFaceSeedObject");
-
-			pointList.y += 350;
-			pointList.z -= 1800;
-			GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-
-			// 重力方向に向きを修正
-			GameObject childObject = newGameObject.transform.GetChild(0).gameObject;
-			childObject.transform.Rotate (new Vector3 (0, -90, 0));
-
-		}
-	}
-
-	/// <summary>
-	/// 半笑い花火作成
-	/// </summary>
-	private void createSmileFaceFireworks() {
-
-		Transform player = GameObject.Find ("Player").transform;
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject prefab = (GameObject)Resources.Load ("Prefab/16-FaceSeedObject");
-
-			pointList.x += 1200;
-			pointList.y += 100;
-			pointList.z += 0;
-
-			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-		}
-	}
-
-	/// <summary>
-	/// ミッキー（円３つ）型の花火作成
-	/// </summary>
-	private void createMichy3CirlesFireworks() {
-
-		Transform player = GameObject.Find ("Player").transform;
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/19-MickySeedObject");
-
-			pointList.y += 350;
-			pointList.z -= 1800;
-			GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-
-			// 重力方向に向きを修正
-			GameObject childObject = newGameObject.transform.GetChild (0).gameObject;
-			childObject.transform.Rotate (new Vector3 (0, -90, 0));
-		}
-	}
-
-	/// <summary>
-	/// アイスクリーム型の花火作成
-	/// </summary>
-	private void createIceCreamFireworks() {
-		Transform player = GameObject.Find ("Player").transform;
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject prefab = (GameObject)Resources.Load ("Prefab/17-IceCreamObject");
-
-			pointList.y += 10;
-			pointList.z += 100;
-
-			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-		}
-	}
-
-	/// <summary>
-	/// モンスターボール型の花火作成
-	/// </summary>
-	private void createMonstarBallFireworks() {
-		Transform player = GameObject.Find ("Player").transform;
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject prefab = (GameObject)Resources.Load ("Prefab/18-MonstarBallObject");
-
-			pointList.x += 1200;
-			pointList.y += 100;
-			pointList.z += 0;
-
-			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 140));
-		}
-	}
-
-	/// <summary>
-	/// 螺旋型の花火作成
-	/// Creates the spiral fireworks.
-	/// </summary>
-	private void createSpiralFireworks() {
-
-		Transform player = GameObject.Find ("Player").transform;
-
-		if (player != null) {
-			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-
-			Vector3 pointList = mainPlayer.transform.position;
-			GameObject perefab = (GameObject)Resources.Load ("Prefab/22-SpiralSeedObject");
-
-			pointList.z -= 1800;
-			GameObject newGameObject = Instantiate (perefab, pointList, Quaternion.identity);
-			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
-
-			// 重力方向に向きを修正
-			GameObject childObject = newGameObject.transform.GetChild(0).gameObject;
-			childObject.transform.Rotate (new Vector3 (0, -90, -90));
-
-		}
-	}
-
+		
 	/// <summary>
 	/// デモ用の花火作成
 	/// Creates the demo fireworks.
@@ -505,14 +208,19 @@ public class View : MonoBehaviour {
 	private void createFireworksWithMeshObject(string prehabPath, int childObjectNum) {
 
 		Transform player = GameObject.Find ("Player").transform;
+
 		if (player != null) {
 			GameObject mainPlayer = player.Find ("MainPlayer").gameObject;
-			Vector3 pointList = mainPlayer.transform.position;
 			GameObject prefab = (GameObject)Resources.Load (prehabPath);
-			pointList.z -= 1800;
-			pointList.y += 500;
+
+			// 花火の打ち上げ地点を設定
+			Vector3 pointList = calcLaunchPoint(mainPlayer);
+
+			// 親オブジェクトの向き修正
 			GameObject seedObject = Instantiate (prefab, pointList, Quaternion.identity);
 			seedObject.transform.Rotate (new Vector3 (-90, 0, 0));
+
+			// 子オブジェクトの向きを修正
 			for (int i=0; i<childObjectNum; i++) {
 				// 重力方向に向きを修正
 				GameObject childObject = seedObject.transform.GetChild (i).gameObject;
@@ -570,4 +278,23 @@ public class View : MonoBehaviour {
 
 		return result;
 	}
+
+	/// <summary>
+	/// 打ち上げ地点の座標を計算する
+	/// </summary>
+	/// <returns>The launch point.</returns>
+	private Vector3 calcLaunchPoint(GameObject player) {
+
+		// 座標の初期値を取得
+		Vector3 pointList = player.transform.position;
+
+		// 花火の打ち上げ地点を設定
+		System.Random rnd = new System.Random();
+		int r = rnd.Next(LAUNCH_POINT_NUM);
+		pointList.z -= 700 + 2000 * r;
+		pointList.y += 800;
+
+		return pointList;
+	}
+
 }

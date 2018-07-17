@@ -271,10 +271,6 @@ public class MeshCreator : MonoBehaviour
 	{
 		var mesh = new Mesh();
 
-		var meshSize = 100;
-
-		var radian = Math.PI * angle / 180.0;
-
 		// 座標に回転を加える
 		vertextList.Add(rotateVector3(point0, angle)); //0番頂点
 		vertextList.Add(rotateVector3(point1, angle)); //1番頂点
@@ -299,8 +295,6 @@ public class MeshCreator : MonoBehaviour
 	private Mesh CreateTriangleMesh(Vector3 point0, Vector3 point1, Vector3 point2)
 	{
 		var mesh = new Mesh();
-
-		var meshSize = 100;
 
 		vertextList.Add(point0); //0番頂点
 		vertextList.Add(point1); //1番頂点
@@ -522,7 +516,6 @@ public class MeshCreator : MonoBehaviour
 
 		double increment = 0.0005;
 		var triangle_num = Math.PI * 2 / increment;
-		int ii = 0;
 
 		for (double t = -Math.PI/2; t < 3 * Math.PI / 2; t+=increment) {
 
