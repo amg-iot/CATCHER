@@ -195,7 +195,8 @@ public class Presenter : MonoBehaviour {
 
 			foreach(PersonalData party in  jsonData.party){
 				collection.Add(party);
-				yield return new WaitForSeconds(0.5f);
+				// 3秒間待ちます
+				yield return new WaitForSeconds(2.5f);
 			}
 		}
 
