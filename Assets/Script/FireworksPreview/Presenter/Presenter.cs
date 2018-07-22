@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using MiniJSON;
 
@@ -27,6 +28,9 @@ public class Presenter : MonoBehaviour {
 	// 準備中キャンパス
 	private CanvasGroup canvasWaitGroup = null;
 
+	// 終わりキャンパス
+	private CanvasGroup canvasEndGroup = null;
+
 	/**
 	* Viewのイベントの設定を行う.
 	*/
@@ -46,8 +50,10 @@ public class Presenter : MonoBehaviour {
 	* 開始関数.
 	*/
 	void Start () {
-		Text waitText = GameObject.Find("TextNext").GetComponent<Text>();
+		canvasEndGroup = GameObject.Find("EndCanvas").GetComponent<CanvasGroup>();
+		canvasEndGroup.alpha = 0;
 
+		Text waitText = GameObject.Find("TextNext").GetComponent<Text>();
 		waitText.text = "";
 		// 文字変更コールバック設定
 		StartCoroutine( FuncCoroutine() );
@@ -154,6 +160,22 @@ public class Presenter : MonoBehaviour {
 		return jsonData;
 	}
 
+	IEnumerator endHanabi() {
+		
+		// 10秒間待ちます
+		yield return new WaitForSeconds(10f);
+
+		canvasEndGroup.alpha = 1;
+
+		// 10秒間待ちます
+		yield return new WaitForSeconds(20f);
+
+		// Photon接続設定画面に遷移する
+		SceneManager.LoadScene ("Menu");
+
+		yield return true;
+	}
+
 	IEnumerator goHanabi(string data) {
 		Text waitText = GameObject.Find("TextNext").GetComponent<Text>();
 
@@ -188,6 +210,8 @@ public class Presenter : MonoBehaviour {
 				yield return new WaitForSeconds(2.5f);
 			}
 		}
+
+		StartCoroutine( endHanabi() );
 
 		yield return true;
 	}

@@ -65,7 +65,6 @@ public class PhotonCommon : Photon.PunBehaviour {
         _async.allowSceneActivation = false;
 		 while (_async.progress < 0.9f) //0.9で止まる
         {
-            Debug.Log(_async.progress);
 			progress.fillAmount = (float)_async.progress;
 			if (count == 0) {
 				loadText.text = "NowLoading";
@@ -84,7 +83,6 @@ public class PhotonCommon : Photon.PunBehaviour {
 				count = 0;
 			}
         }
-        Debug.Log("ロード完了");
         _async.allowSceneActivation = true;
 
 		yield return _async;

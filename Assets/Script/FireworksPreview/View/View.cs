@@ -31,8 +31,6 @@ public class View : MonoBehaviour {
 
 		BulletArr[] bulletArr = party.bulletArr;
 
-		Debug.Log ("bulletLength:" + bulletArr.Length);
-
 		if (bulletArr.Length == 0) {
 			/** 球型 （テスト用）*/
 			createFireworksWithMeshObject ("Prefab/15-DefaultSeedObject", 1);
