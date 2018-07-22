@@ -7,6 +7,8 @@ using MiniJSON;
 
 public class PhotonNetClient : Photon.PunBehaviour {
 	private string g_JsonStr = "";
+	private int max_num = 0;
+	private int load_count = 0;
     
 	/**
 	* Use this for initialization.
@@ -14,69 +16,24 @@ public class PhotonNetClient : Photon.PunBehaviour {
 	void Start () {
 	}
 
-	// /**
-	// * 各花火データを一つにまとめる.
-	// */
-	// private HanabiDataList[] convMainList(JsonData jsonData) {
-	// 	int addCount = 0;
-	// 	HanabiDataList[] result = new HanabiDataList[addCount];
-
-	// 	foreach(PersonalData json in jsonData.party){
-			
-	// 		foreach(BulletArr bulletArr in json.bulletArr){
-	// 			System.Array.Resize(ref result, ++addCount);
-	// 			result[addCount-1] = new HanabiDataList();
-
-	// 			result[addCount-1].author = json.author;
-	// 			result[addCount-1].sex = json.sex;
-	// 			result[addCount-1].name = json.name;
-	// 			result[addCount-1].y = json.y;
-	// 			result[addCount-1].speed_main = json.speed;
-	// 			result[addCount-1].type = bulletArr.type;
-	// 			result[addCount-1].speed = bulletArr.speed;
-	// 			result[addCount-1].color = bulletArr.color;
-	// 			result[addCount-1].degree = bulletArr.degree;
-	// 			result[addCount-1].radius = bulletArr.radius;
-	// 			result[addCount-1].rectWidth = bulletArr.rectWidth;
-	// 			result[addCount-1].rectHeight = bulletArr.rectHeight;
-	// 		}
-	// 	}
-
-	// 	return result;
-	// }
-
-	public HanabiDataList[] Shuffle(HanabiDataList[] array)
-	{
-		var length = array.Length;
-		var result = new HanabiDataList[length];
-		System.Array.Copy(array, result, length);
-
-		var random = new System.Random();
-		int n = length;
-		while (1 < n)
-		{
-			n--;
-			int k = random.Next(n + 1);
-			var tmp = result[k];
-			result[k] = result[n];
-			result[n] = tmp;
-		}
-		return result;
-	}
-
 	/**
 	* サーバー側からのデータ送信時に呼び出される.
 	*/
-	public void OnPhotonCustomRoomPropertiesChanged( ExitGames.Client.Photon.Hashtable changedProperties ){
+	public void OnPhotonCustomRoomPropertiesChanged( ExitGames.Client.Photon.Hashtable changedProperties ) {
 		object value = null;
+		Text waitText = GameObject.Find("TextNext").GetComponent<Text>();
 
 		if (changedProperties.TryGetValue ("startSendJson", out value)) {
 			g_JsonStr = "";
+			max_num = (int)value;
+			waitText.text = "サーバーデータ受信 カウント" + (++load_count) + "/" + max_num;
 		}
 		else if (changedProperties.TryGetValue ("sendJson", out value)) {
 			g_JsonStr += (string)value;
+			waitText.text = "サーバーデータ受信 カウント" + (++load_count) + "/" + max_num;
 		}
 		else if (changedProperties.TryGetValue ("endSendJson", out value)) {
+			waitText.text = "サーバーデータ受信 完了";
 			// 同一オブジェクト内のソースのみ可能
 			Presenter presenter = GetComponent<Presenter>();
 			presenter.StartHanabi(g_JsonStr);

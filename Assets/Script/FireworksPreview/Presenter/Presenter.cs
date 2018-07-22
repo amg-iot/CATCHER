@@ -28,9 +28,27 @@ public class Presenter : MonoBehaviour {
 	private CanvasGroup canvasWaitGroup = null;
 
 	/**
+	* Viewのイベントの設定を行う.
+	*/
+	private void SetEvents()
+	{
+        // var hoge = GameObject.Find("sum");
+		// EventTrigger trigger = hoge.GetComponent<EventTrigger>();
+		// EventTrigger.Entry entry = new EventTrigger.Entry();
+		// entry.eventID = EventTriggerType.PointerDown;
+		// entry.callback.AddListener(( data ) => { _view.OnSumButtonClicked( (PointerEventData)data ); });
+		// trigger.triggers.Add(entry);
+
+		// _view.OnSumButtonClickedListener = OnSumButtonChildClicked;
+	}
+
+	/**
 	* 開始関数.
 	*/
 	void Start () {
+		Text waitText = GameObject.Find("TextNext").GetComponent<Text>();
+
+		waitText.text = "";
 		// 文字変更コールバック設定
 		StartCoroutine( FuncCoroutine() );
 	}
@@ -74,54 +92,29 @@ public class Presenter : MonoBehaviour {
 		// 各種ビューのコールバックを設定	
 		SetEvents();
 	}
-
-	/**
-	* Viewのイベントの設定を行う.
-	*/
-	private void SetEvents()
-	{
-        // var hoge = GameObject.Find("sum");
-		// EventTrigger trigger = hoge.GetComponent<EventTrigger>();
-		// EventTrigger.Entry entry = new EventTrigger.Entry();
-		// entry.eventID = EventTriggerType.PointerDown;
-		// entry.callback.AddListener(( data ) => { _view.OnSumButtonClicked( (PointerEventData)data ); });
-		// trigger.triggers.Add(entry);
-
-		// _view.OnSumButtonClickedListener = OnSumButtonChildClicked;
-	}
 	
 	/**
 	* JSONデータのパースを行う.
 	*/
 	private JsonData readJsonData(string text) {
+		Text waitText = GameObject.Find("TextNext").GetComponent<Text>();
 		JsonData jsonData = new JsonData();
 		
 		long count = 0;
+		int max_count = 0;
 		IList familyList = (IList)Json.Deserialize(text);
 		PersonalData[] personalDataList = new PersonalData[familyList.Count];
+		
+		max_count = familyList.Count;
+		waitText.text = "最大パースカウント 1/" + max_count;
 		foreach(IDictionary json in familyList){
 			personalDataList[count] = new PersonalData();
 
-			if (json.Contains("author")) {
-				personalDataList[count].author = (string) json["author"];
-				Debug.Log((string) json["author"]);
-			}
-			if (json.Contains("sex")) {
-				personalDataList[count].sex = (string) json["sex"];
-				Debug.Log((string) json["sex"]);
-			}
-			if (json.Contains("name")) {
-				personalDataList[count].name = (string) json["name"];
-				Debug.Log((string) json["name"]);
-			}
-			if (json.Contains("y")) {
-				personalDataList[count].y = (long) json["y"];
-				Debug.Log((long) json["y"]);
-			}
-			if (json.Contains("speed")) {
-				personalDataList[count].speed = (long) json["speed"];
-				Debug.Log((long) json["speed"]);
-			}
+			personalDataList[count].author = (string) json["author"];
+			personalDataList[count].sex = (string) json["sex"];
+			personalDataList[count].name = (string) json["name"];
+			// personalDataList[count].y = (long) json["y"];
+			// personalDataList[count].speed = (long) json["speed"];
 
 			long num = 0;
 			IList elem = (IList)json["bulletArr"];
@@ -132,31 +125,27 @@ public class Presenter : MonoBehaviour {
 
 				if (item.Contains("type")) {
 					bulletArrList[num].type = (string) item["type"];
-					Debug.Log((string) item["type"]);
 				}
-				if (item.Contains("speed")) {
-					bulletArrList[num].speed = 0;
-					// bulletArrList[num].speed = (long) item["speed"];
-					// Debug.Log((long) item["speed"]);
-				}
+				// if (item.Contains("speed")) {
+				// 	bulletArrList[num].speed = 0;
+				// 	// bulletArrList[num].speed = (long) item["speed"];
+				// }
 				if (item.Contains("color")) {
 					bulletArrList[num].color = (long) item["color"];
-					Debug.Log((long) item["color"]);
 				}
 				if (item.Contains("degree")) {
 					bulletArrList[num].degree = (long) item["degree"];
-					Debug.Log((long) item["degree"]);
 				}
-				if (item.Contains("rectWidth")) {
-					bulletArrList[num].rectWidth = (long) item["rectWidth"];
-					Debug.Log((long) item["rectWidth"]);
-				}
-				if (item.Contains("rectHeight")) {
-					bulletArrList[num].rectHeight = (long) item["rectHeight"];
-					Debug.Log((long) item["rectHeight"]);
-				}
+				// if (item.Contains("rectWidth")) {
+				// 	bulletArrList[num].rectWidth = (long) item["rectWidth"];
+				// }
+				// if (item.Contains("rectHeight")) {
+				// 	bulletArrList[num].rectHeight = (long) item["rectHeight"];
+				// }
 				num++;
 			}
+
+			waitText.text = "最大パースカウント " + count + "/" + max_count;
 			personalDataList[count].bulletArr = bulletArrList;
 			count++;
 		}
@@ -166,6 +155,7 @@ public class Presenter : MonoBehaviour {
 	}
 
 	IEnumerator goHanabi(string data) {
+		Text waitText = GameObject.Find("TextNext").GetComponent<Text>();
 
 		i_run = true;
 		JsonData jsonData = new JsonData();
@@ -173,9 +163,8 @@ public class Presenter : MonoBehaviour {
 		bool b_ok = true;
 		// ルームプロパティから花火のデータを取得
 		try {
-
-			string repText = data.Replace("\r\n", "");
-			jsonData = readJsonData(repText);
+			waitText.text = "花火データパース開始";
+			jsonData = readJsonData(data.Replace("\r\n", ""));
 		} catch {
 			b_ok = false;
 		}
@@ -208,9 +197,9 @@ public class Presenter : MonoBehaviour {
 	*/
 	public void StartHanabi (string data) {
 
-		if (i_run) {
-			return;
-		}
+		if (i_run) return;
+
+		// 花火の開始
 		StartCoroutine( goHanabi(data) );
 	}
 }

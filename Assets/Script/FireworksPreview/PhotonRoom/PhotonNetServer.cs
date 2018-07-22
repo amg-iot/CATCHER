@@ -52,20 +52,6 @@ public class PhotonNetServer : Photon.PunBehaviour {
 				}
 			}
 		} catch (UnityException e) {}
-
-        // DirectoryInfo dir = new DirectoryInfo(Application.dataPath + "/Resources/Save/" );
-        // FileInfo[] info = dir.GetFiles("*.txt");
-		// foreach(FileInfo f in info){
-		// 	Debug.Log( f.Name );
-		// 	GameObject perefab = (GameObject)Resources.Load ("Prefab/FileLabel");
-		// 	GameObject newGameObject = Instantiate (perefab, content.sizeDelta, Quaternion.identity);
-		// 	newGameObject.transform.SetParent(content, false);
-		// 	//ボタンのテキスト変更
-		// 	newGameObject.transform.GetComponentInChildren<Text>().text = "    " + f.Name;
-		// 	string name = f.Name;
-		// 	//ボタンのクリックイベント登録
-		// 	newGameObject.transform.GetComponent<Button>().onClick.AddListener(() => OnClick(name));
-		// }
 	}
 
 	/**
@@ -85,11 +71,6 @@ public class PhotonNetServer : Photon.PunBehaviour {
 		NKTextMan textMan = gameObject.GetComponent<NKTextMan> ();
 
 		string strStream = textMan.readText("/Resources/Save/" + fileNameInputField.text);
-
-		string repText = strStream.Replace("\r\n", "");
-		var properties  = new ExitGames.Client.Photon.Hashtable();
-		properties.Add( "jsonText", repText );
-		// PhotonNetwork.room.SetCustomProperties( properties );
 	}
 	
 	private IEnumerator LoadText(string textFileName){
@@ -99,7 +80,6 @@ public class PhotonNetServer : Photon.PunBehaviour {
 		string description = "";
 		
 		Debug.Log( Application.streamingAssetsPath );
-		//path = Application.streamingAssetsPath + "/" + textFileName;
 		path = Application.dataPath + "/StreamingAssets" + "/" + textFileName;
 		Debug.Log("filepath:"+path);
 
@@ -110,14 +90,13 @@ public class PhotonNetServer : Photon.PunBehaviour {
 			if (txtReader != null) {
 				yield return new WaitForSeconds(0f);
 				description = txtReader.ReadToEnd();
+
+				string[] result = mbStrSplit(description, 1000);
 				
 				var properties  = new ExitGames.Client.Photon.Hashtable();
-				properties.Add( "startSendJson", "" );
+				properties.Add( "startSendJson", result.Length );
 				PhotonNetwork.room.SetCustomProperties( properties );
 
-				int num = 0;
-				//string[] result = mbStrSplit(description, 10000);
-				string[] result = mbStrSplit(description, 1000);
 				foreach ( var jsonData in result )
 				{
 					var properties2  = new ExitGames.Client.Photon.Hashtable();
@@ -141,6 +120,36 @@ public class PhotonNetServer : Photon.PunBehaviour {
 		InputField fileNameInputField = GameObject.Find("FileNameInputField").GetComponent<InputField>();
 
 		StartCoroutine( LoadText(fileNameInputField.text) );
+	}
+
+	/**
+	* JSONデータ保存ボタン.
+	*/
+	public void OnClickJsonSaveButton() {
+		InputField fileNameInputField = GameObject.Find("FileNameInputField").GetComponent<InputField>();
+		InputField jsonInput = GameObject.Find("jsonInput").GetComponent<InputField>();
+		NKTextMan textMan = gameObject.GetComponent<NKTextMan> ();
+
+		//保存
+		if(textMan.saveText("/Resources/Save/" + fileNameInputField.text, jsonInput.text)){
+		　　//保存成功
+		} else {
+		　　//保存失敗
+		}
+	}
+	
+	/**
+	* JSONデータ送信ボタン.
+	*/
+	public void OnClickSendButton() {
+		// InputField jsonInput = GameObject.Find("jsonInput").GetComponent<InputField>();
+
+		// if (jsonInput != null) {
+		// 	string repText = jsonInput.text.Replace("\r\n", "");
+		// 	var properties  = new ExitGames.Client.Photon.Hashtable();
+		// 	properties.Add( "jsonText", repText );
+		// 	PhotonNetwork.room.SetCustomProperties( properties );
+		// }
 	}
 
 	//*********************************************************************
@@ -195,56 +204,4 @@ public class PhotonNetServer : Photon.PunBehaviour {
 		// 分割後データを配列に変換して返す
 		return outArray.ToArray();
 	}
-
-	/**
-	* JSONデータ保存ボタン.
-	*/
-	public void OnClickJsonSaveButton() {
-		InputField fileNameInputField = GameObject.Find("FileNameInputField").GetComponent<InputField>();
-		InputField jsonInput = GameObject.Find("jsonInput").GetComponent<InputField>();
-		NKTextMan textMan = gameObject.GetComponent<NKTextMan> ();
-
-		//保存
-		if(textMan.saveText("/Resources/Save/" + fileNameInputField.text, jsonInput.text)){
-		　　//保存成功
-		} else {
-		　　//保存失敗
-		}
-	}
-	
-	/**
-	* JSONデータ送信ボタン.
-	*/
-	public void OnClickSendButton() {
-		// InputField jsonInput = GameObject.Find("jsonInput").GetComponent<InputField>();
-
-		// if (jsonInput != null) {
-		// 	string repText = jsonInput.text.Replace("\r\n", "");
-		// 	var properties  = new ExitGames.Client.Photon.Hashtable();
-		// 	properties.Add( "jsonText", repText );
-		// 	PhotonNetwork.room.SetCustomProperties( properties );
-		// }
-
-	}
-
-	// /**
-	// * サーバー側からのデータ送信時に呼び出される.
-	// */
-	// public void OnPhotonCustomRoomPropertiesChanged( ExitGames.Client.Photon.Hashtable changedProperties ){
-	// 	object value = null;
-
-	// 	if (changedProperties.TryGetValue ("startSendJson", out value)) {
-	// 		g_JsonStr = "";
-	// 	}
-	// 	else if (changedProperties.TryGetValue ("sendJson", out value)) {
-	// 		g_JsonStr += (string)value;
-	// 	}
-	// 	else if (changedProperties.TryGetValue ("endSendJson", out value)) {
-	// 		// ルームプロパティから花火のデータを取得
-	// 		try {
-	// 			string repText = g_JsonStr.Replace("\r\n", "");
-	// 		} catch {
-	// 		}
-	// 	}
-	// }
 }
