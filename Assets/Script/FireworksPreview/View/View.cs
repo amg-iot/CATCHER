@@ -290,7 +290,7 @@ public class View : MonoBehaviour {
 		System.Random rnd = new System.Random();
 		int r = rnd.Next(LAUNCH_POINT_NUM);
 		pointList.z -= 700 + 2000 * r;
-		pointList.y += 800;
+		pointList.y += 1200;
 
 		return pointList;
 	}

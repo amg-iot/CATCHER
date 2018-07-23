@@ -7,7 +7,7 @@ public class FireworksSpread : MonoBehaviour {
 	public Vector3 defaultScale = Vector3.zero;
 	private ParticleSystem parent_particle;
 	private float lifetime=0;
-	private float velo_size = 0.1f;
+	private float velo_size = 0.2f;
 
 	// Use this for initialization
 	void Start () {
@@ -38,7 +38,7 @@ public class FireworksSpread : MonoBehaviour {
 			//   c#のMath.Powでは計算できないので、1/tとして近似する。
 			float velocity = (float) velo_size / lifetime; //(Mathf.Pow (i, -3/5));
 
-			this.transform.localScale += new Vector3 (velocity,velocity,velocity/20);//指定数だけ拡大させる
+			this.transform.localScale += new Vector3 (velocity, velocity, velocity/20);//指定数だけ拡大させる
 
 			this.gameObject.transform.parent.Translate (0f, 0f, 0f);//-velocity * 750f);
 		}
