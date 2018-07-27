@@ -202,16 +202,30 @@ public class Presenter : MonoBehaviour {
 			.Subscribe(x =>
 			{
 				_view.ViewFireworks((PersonalData) x.Value);
-			});
+			});	
 
-			foreach(PersonalData party in  jsonData.party){
-				collection.Add(party);
-				// 3秒間待ちます
-				yield return new WaitForSeconds(2.5f);
+			for (int i=0; i < 300; i++) {
+
+				foreach(PersonalData party in  jsonData.party){
+					collection.Add(party);
+					// 3秒間待ちます
+					yield return new WaitForSeconds(2.5f);
+				}
+				collection.Clear();
+
+				// 5秒間待ちます
+				yield return new WaitForSeconds(10f);
+				//リストで保持しているインスタンスを削除
+				for (int j = 0; j < _view.g_DeletePrefab.Count; j++)
+				{
+					Destroy(_view.g_DeletePrefab[j]);
+				}
+				//リスト自体をキレイにする
+				_view.g_DeletePrefab.Clear();
 			}
 		}
 
-		StartCoroutine( endHanabi() );
+		//StartCoroutine( endHanabi() );
 
 		yield return true;
 	}

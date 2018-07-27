@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/photonSetting.unity
+- path: Assets/Scene/LaunchFireworks.unity
   isLoaded: 1
   isActive: 1

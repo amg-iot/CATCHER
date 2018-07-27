@@ -20,6 +20,9 @@ public class View : MonoBehaviour {
 	[SerializeField]
 	public OnSumButtonChildClicked OnSumButtonClickedListener;
 
+	[SerializeField]
+	public List<GameObject> g_DeletePrefab = new List<GameObject>();
+
 	// 花火の打ち上げ地点の数
 	private const int LAUNCH_POINT_NUM = 3;
 
@@ -154,6 +157,7 @@ public class View : MonoBehaviour {
 
 			GameObject newGameObject = Instantiate (prefab, pointList, Quaternion.identity);
 			newGameObject.transform.Rotate (new Vector3 (-90, 0, 0));
+			g_DeletePrefab.Add(newGameObject);
 
 			if (prefab.activeSelf) {
 				// 子要素のFireworksObjectの角度を調整
@@ -217,6 +221,7 @@ public class View : MonoBehaviour {
 			// 親オブジェクトの向き修正
 			GameObject seedObject = Instantiate (prefab, pointList, Quaternion.identity);
 			seedObject.transform.Rotate (new Vector3 (-90, 0, 0));
+			g_DeletePrefab.Add(seedObject);
 
 			// 子オブジェクトの向きを修正
 			for (int i=0; i<childObjectNum; i++) {
